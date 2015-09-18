@@ -1,6 +1,9 @@
 var insightManager = {
 	init : function(){	
 		insightManager.bindEvents();
+		insightManager.moduleAppendAtDashboard('s0');
+		insightManager.moduleAppendAtDashboard('dp0');
+		insightManager.moduleAppendAtDashboard('p0');
 	},	
 	id : "",
 	elements : [],
@@ -50,21 +53,20 @@ var insightManager = {
 		/**     default funtionailities of tab */
 	},
 	moduleAppendAtDashboard : function(id){
-		
-		
-		
+
 		var activeTemp = "";
 		var temp ;
 		if(id in mapper["sales"]){
 			headingName = mapper["sales"][id]; 
+			activeTemp = "sales";
 		}
 		else if(id in mapper["digital"]){
 			headingName = mapper["digital"][id]; 
-			temp = digitalTemp;
+			activeTemp = "digital";
 		}
 		else{
-			headingName = mapper["promos"][id] ;
-			temp =  promosTemp;
+			headingName = mapper["promos"][id];
+			activeTemp = "promos";
 		}
 		
 		var salesTemp =  '<div class="box box-primary" draggable="true" ondragstart="insightManager.ondragstart(event)" >'+
@@ -111,7 +113,7 @@ var insightManager = {
 		if(activeTemp == "sales"){
 			temp = salesTemp;
 		}
-		else if(activeTemp == "digitalTemp"){
+		else if(activeTemp == "digital"){
 			temp = digitalTemp;
 		}
 		else{
