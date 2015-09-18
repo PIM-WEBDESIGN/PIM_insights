@@ -88,7 +88,7 @@ ul.user li.user-setting a{ background-color:#363f50; color:#FFF; border-radius:5
 .tabPanel.active{ right:0;}
 
 /* Tab */
-.tabPanel .nav.nav-tabs{ width:275px; margin:auto; border:none; position:relative; top:36px; height:28px; float:none; background:#343233; border-radius:3px; padding:0 7px; }
+.tabPanel .nav.nav-tabs{ width:300px; margin:auto; border:none; position:relative; top:36px; height:28px; float:none; background:#343233; border-radius:3px; padding:0 7px; }
 .tabPanel .nav.nav-tabs > li{ margin:0 2px; }
 .tabPanel .nav.nav-tabs a{ height:35px; line-height:35px; margin:-4px 0 0 0; border:none!important; text-transform:uppercase;  }
 .tabPanel .nav.nav-tabs a:hover{ border:none!important;  background:url(../img/yellowbg.jpg) top left repeat-x; border-radius:3px!important; color:#000; position:relative; }
