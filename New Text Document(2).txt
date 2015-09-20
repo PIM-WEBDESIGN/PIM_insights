@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+<style type="text/css">
+  
+    .list-table
+    { width:100%;
+        display: table; border-collapse:collapse;
+    }
+
+     .list-row
+    {
+        display: table-row; border-collapse:collapse;
+    }
+    .list-cell
+    {
+        display: table-cell;
+        border: solid 1px #d0d0d0;
+		border-collapse:collapse;
+     
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+	 .list-cell:first-child{ border-left:none; }
+	 .list-cell:last-child{  border-right:none;}
+</style>
+<body>
+
+<div class="list-table">
+
+    
+    <div class="list-row"><div class="list-cell"><p>Row 1 Column 1</p></div><div class="list-cell"><p>Row 1 Column 2</p></div></div>
+    
+</div>
+
+</body>
+</html>
