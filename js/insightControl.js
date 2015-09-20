@@ -17,13 +17,31 @@ var insightManager = {
 		
 		$(document).on('click','i',function(){
 			if($($(this).parent()).attr('type') == "button"){
+				
 				var id = $($(this).parent().parent()).attr('id');
-				console.log(id);
 				insightManager.moduleRevertBack(id);
 				$($(this).parent().parent().parent().parent()).remove();
 			}
 		});
-	
+		
+		
+		$(document).on('click','.left',function(){
+			var id = $($(this).parent()).attr('id');
+			console.log(id)
+				$($(document).find('#chart_' + id )).css('display','none');
+				$($(document).find("#chart_list_" + id )).css('display','block');
+				var container =  $('#chart_list_' + id );
+				insightManager.appendFullList(container,id);		
+		});
+		
+		$(document).on('click','.right',function(){
+			var id = $($(this).parent()).attr('id');			
+			console.log(id)
+			$('#chart_' + id ).css('display','block');
+			$('#chart_list_' + id ).css('display','none');
+
+		});
+		
 		/**     default funtionailities of tab */
 		$('#myTabs a').click(function (e) {
 			e.preventDefault()
@@ -50,6 +68,10 @@ var insightManager = {
 		$('button.btn-box-tool').click(function(){
 			$(this).next('.col-md-4.col-sm-12').hide();
 		});
+		
+		
+		
+		
 		/**     default funtionailities of tab */
 	},
 	moduleAppendAtDashboard : function(id){
@@ -73,41 +95,46 @@ var insightManager = {
 					'<div class="box-header with-border">'+
 						'<h3 class="box-title"> <i class="fa fa-shopping-cart"></i>'+ headingName +'</h3>'+
 						'<div class="box-tools pull-right" id='+ id +'>'+
-							'<button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times delete"></i></button>'+
-						'</div>'+
+							'<button type="button" class="btn btn-box-tool" data-widget="remove"><button  class="btn btn-info btn-xs btn-toggle-left button-list-group left" > Top Performers </button><button class="btn  btn-xs btn-toggle-right button-list-group right">View Complete List  </button> <i class="fa fa-times delete"></i>'+
+							'</button>'+
+							'</div>'+
 					'</div>'+
 					'<div class="box-body">'+
-						'<div class="chart" id="chart_'+ id +'">'+
-							//'<img src="img/chart.png" alt=""/>'+
+						'<div class="chart" id="chart_'+ id +'">'+	
 						'</div>'+
+						'<div class="list-table" style="display : none"  id="chart_list_' + id +'" > <div class="list-row"></div></div>'+
 					'</div><!-- /.box-body -->'+
 				'</div>'; 
 		
-		var digitalTemp =   '<div class="box box-warning" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
+		var digitalTemp =   '<div  class="box box-warning" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
 					'<div class="box-header with-border">'+
 						'<h3 class="box-title"> <i class="fa fa-lightbulb-o" ></i>'+ headingName +'</h3>'+
 						'<div class="box-tools pull-right" id='+ id +'>'+
-							'<button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times delete"></i></button>'+
+							'<button type="button" class="btn btn-box-tool" data-widget="remove"><button  class="btn btn-info btn-xs btn-toggle-left button-list-group left" > Top Performers </button><button class="btn  btn-xs btn-toggle-right button-list-group right">View Complete List  </button> <i class="fa fa-times delete"></i>'+
+							'</button>'+
 						'</div>'+
 					'</div>'+
 					'<div class="box-body">'+
 						'<div class="chart" id="chart_'+ id +'">'+
-							//<'<img src="img/chart.png" alt=""/>'+
+							
 						'</div>'+
+						'<div class="list-table" style="display : none"  id="chart_list_' + id +'" > <div class="list-row"></div></div>'+
 					'</div><!-- /.box-body -->'+
 				'</div>'; 
 				
-		var promosTemp = 	'<div class="box box-success" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
+		var promosTemp = 	'<div  class="box box-success" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
 					'<div class="box-header with-border">'+
 						'<h3 class="box-title"> <i class="fa fa-shopping-cart"></i>'+ headingName +'</h3>'+
 						'<div class="box-tools pull-right" id='+ id +'>'+
-							'<button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times delete"></i></button>'+
+							'<button type="button" class="btn btn-box-tool" data-widget="remove"><button  class="btn btn-info btn-xs btn-toggle-left button-list-group left" > Top Performers </button><button class="btn  btn-xs btn-toggle-right button-list-group right">View Complete List  </button>  <a herf"#"><i class="fa fa-times delete"></i></a>'+
+							'</button>'+
 						'</div>'+
 					'</div>'+
 					'<div class="box-body">'+
 						'<div class="chart" id="chart_'+ id +'">'+
-							//'<img src="img/chart.png" alt=""/>'+
 						'</div>'+
+						'<div class="list-table" style="display : none"  id="chart_list_' + id +'" > <div class="list-row"></div></div>'+
+						'</ul>'+
 					'</div><!-- /.box-body -->'+
 				'</div>';
 		if(activeTemp == "sales"){
@@ -119,12 +146,65 @@ var insightManager = {
 		else{
 			temp = promosTemp;
 		}
+		
 		$('.row').append(temp);
+		var tempList = list;
 		
+		tempList.sort(function(a, b) {
+			return parseFloat(b.val) - parseFloat(a.val);
+		});
 		
-		var stocChart10=$("#chart_" + id).stocCharts(textStyleConfg);
-		stocChart10.drawThreeDBarChart(data);
-
+		var textStyleConfg={"font-family":" 'Maven Pro',sans-serif","font-size":12,"background":"none","font-color":"#a7a7a7","tick-font-color":"#a7a7a7","legendTextColor":"white","font-weight":400,"xLabelColor":"#a7a7a7","yLabelColor":"#a7a7a7","chartTitleColor":"#a7a7a7","titleFontSize":16,"gridLineColor":"#353b37"};
+		
+		var data = {
+					title : "Product Sale(Brand wise)",
+					xAxisLabel :"Current Status",
+					yAxisLabel :"Product",
+					yAxisData : [],
+					key: [
+							{
+								name: 'Product',
+								data: [],
+								color : "#00FFFF"
+							}
+							
+						]
+				}
+		/*
+		AdvancedBarData["yData"] = [];
+		AdvancedBarData["xData"] = [];
+		*/
+		for(var i =0 ;  i < 5 ; i++){
+			data["yAxisData"].push(tempList[i].pn);
+			data["key"][0]['data'].push(tempList[i].val);
+		}
+		/*
+		
+		  var data  =  AdvancedBarData;
+		  var stocChart30=$("#chart_" + id).stocCharts(textStyleConfg);
+		  stocChart30.barWithLogo(cnfg);
+		
+		*/
+		var stocChart55=$("#chart_" + id).stocCharts(textStyleConfg);
+		stocChart55.horizontalStackedBarChartAnalysis(data);
+	},
+	appendFullList :  function(container,id){
+		//list 
+		$(container).empty();
+		var tempList =  list ; 
+		tempList.sort(function(a, b) {
+			return parseFloat(b.val) - parseFloat(a.val);
+		});
+		var temp = "";
+		for(var i = 0 ; i < tempList.length ; i++ ){
+			//temp += '<p> '+tempList[i].pn+'<span style="float :  right">'+ tempList[i].val +'</span></p>';		
+			
+			temp += '<div class="list-cell"><p>'+tempList[i].pn+'</p></div><div class="list-cell"><p>'+tempList[i].val+'</p></div><br>';
+			
+		}
+		console.log(temp);
+		$(container).append(temp);
+		console.log($(container));
 	},
 	moduleRevertBack :  function(id){
 		
@@ -239,11 +319,92 @@ var data =  {
       xAxisData : [2005,2006,2007,2008,2009,2010,2011,2012,2013,2014],
       barColor : "#68aad1"
       };	
-
+var list = [
+			{
+				pn : "7 Up" ,
+				val :  853
+			},
+			{
+				pn : "Diet Pepsi",
+				val :  568,
+			},
+			{
+				pn : "Gatorade",
+				val:2021
+			},
+			{
+				pn : "Kurkure",
+				val :2513	
+			},
+			{
+				pn : "Lay's",
+				val :849	
+			},
+			{
+				pn:"Lay's",
+				val:8252
+			},
+			{
+				pn : "Lipton",
+				val : 3124	
+			},
+			{
+				pn :"Mirinda",
+				val:473	
+			},
+			{
+				pn : "Mountain Dew",
+				val :1271
+			},
+			{
+				pn : "Pepsi",
+				val :416 	
+			},
+			{
+				pn : "Quaker Oats",
+				val:1216
+			},
+			{
+				pn : "Tropicana",
+				val:5305	
+			}
+];/*
 var textStyleConfg={"font-family":" 'Maven Pro',sans-serif","font-size":12,"background":"none","font-color":"#a7a7a7","tick-font-color":"#a7a7a7","legendTextColor":"white","font-weight":400,"xLabelColor":"white","yLabelColor":"white","chartTitleColor":"white","titleFontSize":16,"gridLineColor":"#353b37"};
-	
-	
+*/
+var AdvancedBarData={
+    "title":"Top sales List",
+    "yData":[],
+    'xData':[],
+    "imagePathArray":["img/images/img5.png","img/images/img10.png","img/images/img3.png","img/images/img6.png","img/images/img7.png"],
+    "color":["#e67a77"],
+    "yIndicationLabel":"Profit(in Billion $)",
+    "xIndicationLabel":"Company"
+    
+    /*
+    "yData":[3,5,6],
+    "xData":[1,2,3],
+    "imagePathArray":["/img/images/img5.jpg","./img/logos/2.jpg","./img/logos/3.jpg"],
+    "color":["cyan"]
+    */
+  }
+  
+  var colorArray=["#A3BFDB"];
+  var xFieldName="product";
+  var yFieldName="sales";
+  var axisColor="black";
+
+  var textStyleConfg={"font-family":" 'Maven Pro',sans-serif","font-size":12,"background":"none","font-color":"#a7a7a7","tick-font-color":"#a7a7a7","legendTextColor":"white","font-weight":400,"xLabelColor":"white","yLabelColor":"white","chartTitleColor":"white","titleFontSize":16,"gridLineColor":"#353b37"};
+  var cnfg={"data":AdvancedBarData};	
 	
 window.onload =  function(){
 	insightManager.init();
+	
+$('.button-list-group').on('click', function(){
+    $(this).siblings().removeClass('btn-info')
+    $(this).addClass('btn-info');
+
+})
+
+
+	
 }

@@ -1,0 +1,66 @@
+- Number of products not listed on a channel
+  Access url:- http://localhost:5454/crawlerweb/api/product/notListedProductCount
+  Requied Header: groupId
+  Request Type: GET
+  JSON Response:- 
+   [{
+	notlisted: 3
+	keys: "shopclue-field-list"
+	channelid: 5
+	channel_name: "shopclue"
+	categoryid: "Beverages"
+	},{
+	notlisted: 3
+	keys: "shopclue-field-list"
+	channelid: 5
+	channel_name: "shopclue"
+	categoryid: "SOFT_DRINK"
+	},{
+	notlisted: 3
+	keys: "amazon-field-list"
+	channelid: 3
+	channel_name: "Amazon"
+	categoryid: "Beverages"
+	}]
+
+- Total number of products listed on a channel, brand wise list
+  Access url:- http://localhost:5454/crawlerweb/api/product/listedProductCount
+  Requied Header: groupId
+  Request Type: GET
+  JSON Response:- [
+		  {	listed: 1
+		channelid: 1
+		channel_name: "amazon"
+		productbrand: "ICAN"
+		},{	listed: 1
+		channelid: 1
+		channel_name: "amazon"
+		productbrand: "PEPSI"
+		},  {
+		listed: 2
+		channelid: 4
+		channel_name: "flipkart"
+		productbrand: "Universal Nutrition"
+		}] 
+
+- Number of out of stock products on a channel, brand wise list, city wise
+  Access url:- http://localhost:5454/crawlerweb/api/product/oosProductCountByBrand
+  Requied Header: groupId
+  Request Type: GET
+  JSON Response:-[
+	   {
+		brandbycrawler: "Espoir"
+		brandbypim: "ICAN"
+		channel: "1"
+		count: 1,
+		channel_name: "amazon"
+		}, {
+		brandbycrawler: "PEPSI"
+		brandbypim: "PEPSI"
+		channel: "1"
+		count: 1,
+		channel_name: "amazon"
+		}		
+  ]
+  
+Note:-- We need to replace 'localhost' with hosted machine address. 

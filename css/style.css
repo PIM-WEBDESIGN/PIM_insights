@@ -112,3 +112,35 @@ ul.user li.user-setting a{ background-color:#363f50; color:#FFF; border-radius:5
 
 .thum-box{ width:100%; height:115px;}
 .row-height{ position : absolute ;  height : 100% ; width : 100%}
+
+.btn-toggle-right{ border-top-left-radius:0px !important; border-bottom-left-radius:0px !important; }
+.btn-toggle-left{ border-top-right-radius:0px !important; border-bottom-right-radius:0px !important; }
+
+
+#chart_list_s0, #chart_list_dp0, #chart_list_p0{ margin:0px; padding:0px; height:300px; overflow-x: hidden;
+overflow-y: scroll;}
+
+
+
+    .list-table
+    { width:100%;
+        display: table; border-collapse:collapse;
+    }
+
+     .list-row
+    {
+        display: table-row; border-collapse:collapse;
+    }
+    .list-cell
+    {
+        display: table-cell;
+        border: solid 1px #d0d0d0;
+		border-collapse:collapse;
+     
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+	 .list-cell:first-child{ border-left:none; }
+	 .list-cell:last-child{  border-right:none;}
+	 
+	 i.delete{ cursor:pointer;}

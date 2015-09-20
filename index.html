@@ -12,16 +12,25 @@
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/theme.css">
 		<link rel="stylesheet" href="css/font-awesome.min.css">
+        <link href="css/bootstrap-toggle.css" rel="stylesheet">
 		<!-- Latest compiled and minified JavaScript -->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/insightControl.js"></script>	
 		<script src="js/stocChart.min.js"></script>	
+        <script src="js/bootstrap-toggle.js"></script>
 	</head>
 	
 	<body>
+    
+    
 		<div ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+        
+
+
+
 		<header>
-			<div class="logo"><img src="img/lgoo.png" alt="#"/></div>
+			<div class="logo"> <a  href="javascript:void(0); "> <img  src="img/logo.png" alt="#"/></a></div>
 			<ul class="top-nav">
 				<li ><a href="#"class="active" >Amazon</a></li>
 				<li ><a href="#" >Big Basket</a></li>
@@ -192,74 +201,15 @@
 							<div class="thum-box">
 								<img src="img/chart.png" id="dp10" alt="" >
 							<h2 class="boxtitle">List of products</h2> </div>
-							
 						</div>
-						
-						
-						
 					</div>
-				</div>
-				
-				
-				
-				
+				</div>		
 			</div>
-			
 			<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
-				<!--<div class="box box-primary" draggable="true" ondragstart="insightManager.ondragstart(event)">
-					<div class="box-header with-border">
-						<h3 class="box-title"> <i class="fa fa-shopping-cart"></i>
-						SALES 1</h3>
-						<div class="box-tools pull-right" id="s0">
-							<button type="button" class="btn btn-box-tool" data-widget="remove" id="s0">
-								<i class="fa fa-times delete"></i>
-							</button>
-						</div>
-					</div>
-					<div class="box-body">
-						<div class="chart">
-							<img src="img/chart.png" alt=""/>
-						</div>
-					</div>
-				</div>
-			
-				<div class="box box-warning"  draggable="true" ondragstart="insightManager.ondragstart(event)">
-					<div class="box-header with-border" >
-						<h3 class="box-title"> <i class="fa fa-lightbulb-o"></i>
-							
-						DIGITAL 1</h3>
-						<div class="box-tools pull-right" id="dp0">
-							<button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times delete"></i></button>
-						</div>
-					</div>
-					<div class="box-body">
-						<div class="chart">
-							<img src="img/chart.png" alt=""/>
-						</div>
-					</div>
-				</div>
-				
-				<div class="box box-success"  draggable="true" ondragstart="insightManager.ondragstart(event)">
-					<div class="box-header with-border">
-						<h3 class="box-title"> <i class="fa fa-shopping-cart"></i>
-						PROMOS 1</h3>
-						<div class="box-tools pull-right" id="p0">
-						<button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times delete"></i></button>
-						</div>
-					</div>
-					<div class="box-body">
-						<div class="chart">
-							<img src="img/chart.png" alt=""/>
-						</div>
-					</div>
-				</div>-->
-				
 			</div>
 		</div>
 		</div>
 	</div>
 	</body>
-	<script>
-		
-	</script>
+
 </html>
