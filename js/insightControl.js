@@ -25,20 +25,20 @@ var insightManager = {
 		});
 		
 		
-		$(document).on('click','.left',function(){
+		$(document).on('click','.right',function(){
 			var id = $($(this).parent()).attr('id');
 			console.log(id)
 				$($(document).find('#chart_' + id )).css('display','none');
 				$($(document).find("#chart_list_" + id )).css('display','block');
-				var container =  $('#chart_list_' + id );
+				var container = $($('#chart_list_' + id ).find('.list-table'));
 				insightManager.appendFullList(container,id);		
 		});
 		
-		$(document).on('click','.right',function(){
+		$(document).on('click','.left',function(){
 			var id = $($(this).parent()).attr('id');			
 			console.log(id)
-			$('#chart_' + id ).css('display','block');
-			$('#chart_list_' + id ).css('display','none');
+			$($(document).find('#chart_' + id )).css('display','block');
+			$($(document).find("#chart_list_" + id )).css('display','none');
 
 		});
 		
@@ -93,58 +93,39 @@ var insightManager = {
 		
 		var salesTemp =  '<div class="box box-primary" draggable="true" ondragstart="insightManager.ondragstart(event)" >'+
 					'<div class="box-header with-border">'+
-						'<h3 class="box-title"> <i class="fa fa-shopping-cart"></i>'+ headingName +'</h3>'+
-						'<div class="box-tools pull-right" id='+ id +'>'+
+						'<h3 class="box-title">  <i class="fa fa-shopping-cart"></i>'+ headingName +'</h3>';
+		
+		
+		var digitalTemp =   '<div  class="box box-warning" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
+					'<div class="box-header with-border">'+
+						'<h3 class="box-title">  <i class="fa fa-lightbulb-o" ></i>'+ headingName +'</h3>';
+						
+		var promosTemp = 	'<div  class="box box-success" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
+					'<div class="box-header with-border">'+
+						'<h3 class="box-title">  <i class="fa fa-shopping-cart"></i>'+ headingName +'</h3>';
+						
+		var commonTemp = '<div class="box-tools pull-right" id='+ id +'>'+
 							'<button type="button" class="btn btn-box-tool" data-widget="remove"><button  class="btn btn-info btn-xs btn-toggle-left button-list-group left" > Top Performers </button><button class="btn  btn-xs btn-toggle-right button-list-group right">View Complete List  </button> <i class="fa fa-times delete"></i>'+
 							'</button>'+
 							'</div>'+
 					'</div>'+
-					'<div class="box-body">'+
+					'<div class="box-body ">'+
 						'<div class="chart" id="chart_'+ id +'">'+	
 						'</div>'+
-						'<div class="list-table" style="display : none"  id="chart_list_' + id +'" > <div class="list-row"></div></div>'+
+						'<div class="list-outer-div" style="display : none" id="chart_list_' + id +'" >'+
+						'<div   class="list-table"> </div>'+
+						'</div>'	
 					'</div><!-- /.box-body -->'+
 				'</div>'; 
 		
-		var digitalTemp =   '<div  class="box box-warning" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
-					'<div class="box-header with-border">'+
-						'<h3 class="box-title"> <i class="fa fa-lightbulb-o" ></i>'+ headingName +'</h3>'+
-						'<div class="box-tools pull-right" id='+ id +'>'+
-							'<button type="button" class="btn btn-box-tool" data-widget="remove"><button  class="btn btn-info btn-xs btn-toggle-left button-list-group left" > Top Performers </button><button class="btn  btn-xs btn-toggle-right button-list-group right">View Complete List  </button> <i class="fa fa-times delete"></i>'+
-							'</button>'+
-						'</div>'+
-					'</div>'+
-					'<div class="box-body">'+
-						'<div class="chart" id="chart_'+ id +'">'+
-							
-						'</div>'+
-						'<div class="list-table" style="display : none"  id="chart_list_' + id +'" > <div class="list-row"></div></div>'+
-					'</div><!-- /.box-body -->'+
-				'</div>'; 
-				
-		var promosTemp = 	'<div  class="box box-success" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
-					'<div class="box-header with-border">'+
-						'<h3 class="box-title"> <i class="fa fa-shopping-cart"></i>'+ headingName +'</h3>'+
-						'<div class="box-tools pull-right" id='+ id +'>'+
-							'<button type="button" class="btn btn-box-tool" data-widget="remove"><button  class="btn btn-info btn-xs btn-toggle-left button-list-group left" > Top Performers </button><button class="btn  btn-xs btn-toggle-right button-list-group right">View Complete List  </button>  <a herf"#"><i class="fa fa-times delete"></i></a>'+
-							'</button>'+
-						'</div>'+
-					'</div>'+
-					'<div class="box-body">'+
-						'<div class="chart" id="chart_'+ id +'">'+
-						'</div>'+
-						'<div class="list-table" style="display : none"  id="chart_list_' + id +'" > <div class="list-row"></div></div>'+
-						'</ul>'+
-					'</div><!-- /.box-body -->'+
-				'</div>';
 		if(activeTemp == "sales"){
-			temp = salesTemp;
+			temp = salesTemp +  commonTemp;
 		}
 		else if(activeTemp == "digital"){
-			temp = digitalTemp;
+			temp = digitalTemp +  commonTemp;
 		}
 		else{
-			temp = promosTemp;
+			temp = promosTemp +  commonTemp;
 		}
 		
 		$('.row').append(temp);
@@ -197,10 +178,7 @@ var insightManager = {
 		});
 		var temp = "";
 		for(var i = 0 ; i < tempList.length ; i++ ){
-			//temp += '<p> '+tempList[i].pn+'<span style="float :  right">'+ tempList[i].val +'</span></p>';		
-			
-			temp += '<div class="list-cell"><p>'+tempList[i].pn+'</p></div><div class="list-cell"><p>'+tempList[i].val+'</p></div><br>';
-			
+			temp += ' <div class="list-row"><div class="list-cell">'+tempList[i].pn+'</div><div class="list-cell">'+tempList[i].val+'</div></div>';
 		}
 		console.log(temp);
 		$(container).append(temp);

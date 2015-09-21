@@ -1851,6 +1851,8 @@ a:hover,a:active,a:focus{
 	line-height:1
 }
 
+.box-header>.fa,.box-header>.glyphicon,.box-header>.ion,.box-header .box-title i{ padding:0 10px 0 0}
+
 .box-header>.fa,.box-header>.glyphicon,.box-header>.ion{
 	margin-right:5px
 }

@@ -9,74 +9,74 @@ ul.user li{ margin:10px 10px; padding:0; list-style:none; display:inline;  color
 
 
 
-	.top-nav { margin:0px; padding:0px; 
-			list-style: none; 
-			overflow: hidden; 
-			font: 12px Helvetica, Arial, Sans-Serif; width:400px; float:left;
-		}
-		.top-nav li { 
-			float: left; 
-		}
-		.top-nav li a {
-			color: white;
-			text-decoration: none; 
-			padding: 7px 0 7px 55px;
-			background: #409ccd;                   /* fallback color */
-			background: #409ccd; 
-			position: relative; 
-			display: block;
-			float: left;
-		}
-		.top-nav li a:after { 
-			content: " "; 
-			display: block; 
-			width: 0; 
-			height: 0;
-			border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-			border-bottom: 50px solid transparent;
-			border-left: 30px solid #409ccd;
-			position: absolute;
-			top: 50%;
-			margin-top: -50px; 
-			left: 100%;
-			z-index: 2; 
-		}	
-		.top-nav li a:before { 
-			content: " "; 
-			display: block; 
-			width: 0; 
-			height: 0;
-			border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-			border-bottom: 50px solid transparent;
-			border-left: 30px solid white;
-			position: absolute;
-			top: 50%;
-			margin-top: -50px; 
-			margin-left: 1px;
-			left: 100%;
-			z-index: 1; 
-		}	
-		.top-nav li:first-child a {
-			padding-left: 10px;
-		}
-		
-		.top-nav li:last-child a {
-			background: transparent !important;
-			color: black;
-			pointer-events: none;
-			cursor: default;
-		}
-		.top-nav li:last-child a:after { border: 0; }
-		.top-nav li a:hover { background: #354052 }
-		.top-nav li a:hover:after { border-left-color: #354052 !important; }
-		
-		.top-nav li a.active { background: #354052 }
-		.top-nav li a.active:after  { border-left-color: #354052 !important; }
-		
-	
-	
-	
-	
+.top-nav { margin:0px; padding:0px; 
+	list-style: none; 
+	overflow: hidden; 
+	font: 12px Helvetica, Arial, Sans-Serif; width:400px; float:left;
+}
+.top-nav li { 
+	float: left; 
+}
+.top-nav li a {
+	color: white;
+	text-decoration: none; 
+	padding: 7px 0 7px 55px;
+	background: #409ccd;                   /* fallback color */
+	background: #409ccd; 
+	position: relative; 
+	display: block;
+	float: left;
+}
+.top-nav li a:after { 
+	content: " "; 
+	display: block; 
+	width: 0; 
+	height: 0;
+	border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+	border-bottom: 50px solid transparent;
+	border-left: 30px solid #409ccd;
+	position: absolute;
+	top: 50%;
+	margin-top: -50px; 
+	left: 100%;
+	z-index: 2; 
+}	
+.top-nav li a:before { 
+	content: " "; 
+	display: block; 
+	width: 0; 
+	height: 0;
+	border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+	border-bottom: 50px solid transparent;
+	border-left: 30px solid white;
+	position: absolute;
+	top: 50%;
+	margin-top: -50px; 
+	margin-left: 1px;
+	left: 100%;
+	z-index: 1; 
+}	
+.top-nav li:first-child a {
+	padding-left: 10px;
+}
+
+.top-nav li:last-child a {
+	background: transparent !important;
+	color: black;
+	pointer-events: none;
+	cursor: default;
+}
+.top-nav li:last-child a:after { border: 0; }
+.top-nav li a:hover { background: #354052 }
+.top-nav li a:hover:after { border-left-color: #354052 !important; }
+
+.top-nav li a.active { background: #354052 }
+.top-nav li a.active:after  { border-left-color: #354052 !important; }
+
+
+
+
+
 
 ul.user li.user-setting a{ background-color:#363f50; color:#FFF; border-radius:5px; padding:2px 10px; }
 
@@ -88,7 +88,7 @@ ul.user li.user-setting a{ background-color:#363f50; color:#FFF; border-radius:5
 .tabPanel.active{ right:0;}
 
 /* Tab */
-.tabPanel .nav.nav-tabs{ width:275px; margin:auto; border:none; position:relative; top:36px; height:28px; float:none; background:#343233; border-radius:3px; padding:0 7px; }
+.tabPanel .nav.nav-tabs{ width:440px; margin:auto; border:none; position:relative; top:36px; height:28px; float:none; background:#343233; border-radius:3px; padding:0 7px; }
 .tabPanel .nav.nav-tabs > li{ margin:0 2px; }
 .tabPanel .nav.nav-tabs a{ height:35px; line-height:35px; margin:-4px 0 0 0; border:none!important; text-transform:uppercase;  }
 .tabPanel .nav.nav-tabs a:hover{ border:none!important;  background:url(../img/yellowbg.jpg) top left repeat-x; border-radius:3px!important; color:#000; position:relative; }
@@ -116,31 +116,39 @@ ul.user li.user-setting a{ background-color:#363f50; color:#FFF; border-radius:5
 .btn-toggle-right{ border-top-left-radius:0px !important; border-bottom-left-radius:0px !important; }
 .btn-toggle-left{ border-top-right-radius:0px !important; border-bottom-right-radius:0px !important; }
 
-
-#chart_list_s0, #chart_list_dp0, #chart_list_p0{ margin:0px; padding:0px; height:300px; overflow-x: hidden;
+.listTableHeight{ margin:0px; padding:0px; height:320px; overflow-x: hidden;
 overflow-y: scroll;}
 
 
+.list-outer-div{
+	height:300px; 
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+.list-table
+{ 
+	display: table !important;
+	border-collapse:collapse;
+	border: solid 1px #d0d0d0;
+	margin:0px;
+	padding:0px;
+	width : 100%;
+}
 
-    .list-table
-    { width:100%;
-        display: table; border-collapse:collapse;
-    }
+.list-row
+{
+	display: table-row; border-collapse:collapse;	
+}
+.list-cell
+{
+	display: table-cell;
+	border: solid 1px #d0d0d0;
+	border-collapse:collapse;
+	padding:5px 20px;
 
-     .list-row
-    {
-        display: table-row; border-collapse:collapse;
-    }
-    .list-cell
-    {
-        display: table-cell;
-        border: solid 1px #d0d0d0;
-		border-collapse:collapse;
-     
-        padding-left: 35px;
-        padding-right: 35px;
-    }
-	 .list-cell:first-child{ border-left:none; }
-	 .list-cell:last-child{  border-right:none;}
-	 
-	 i.delete{ cursor:pointer;}
+}
+.list-cell:first-child{ border-left:none; }
+.list-cell:last-child{  border-right:none;}
+
+i.delete{ cursor:pointer;}
+
