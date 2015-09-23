@@ -104,17 +104,18 @@ ul.user li.user-setting a{ background-color:#363f50; color:#FFF; border-radius:5
 
 .tabPanel .tab-content{ width:600px; margin-top:70px; float:left; }
 
-.chart-thum{ border:1px solid #409ccd; width:31.3%; margin:1%; float:left; }
+.chart-thum{ border:1px solid #409ccd; width:31.3%; margin:1%; margin-bottom:30px; float:left; }
 .chart-thum:hover{ opacity:0.5; border:1px solid #865a11; cursor:pointer; }
 .chart-thum:hover .boxtitle{ background:#012f47; }
 .chart-thum img{ width:100%; }
 .chart-thum .boxtitle{ font-size:14px; color:#fff; text-align:center; margin:0;  background:#03527d; line-height:22px; }
 
-.thum-box{ width:100%; height:115px;}
+.thum-box{ width:100%; height:90px;}
+.thum-box img{ width:100%; height:100%;}
 .row-height{ position : absolute ;  height : 100% ; width : 100%}
 
-.btn-toggle-right{ border-top-left-radius:0px !important; border-bottom-left-radius:0px !important; }
-.btn-toggle-left{ border-top-right-radius:0px !important; border-bottom-right-radius:0px !important; }
+.btn-toggle-right{ font-family:arial; font-size:17px; padding:2px 5px; border-top-left-radius:0px !important; border-bottom-left-radius:0px !important; }
+.btn-toggle-left{ font-family:arial;  font-size:17px; padding:2px 5px;   border-top-right-radius:0px !important; border-bottom-right-radius:0px !important; }
 
 .listTableHeight{ margin:0px; padding:0px; height:320px; overflow-x: hidden;
 overflow-y: scroll;}

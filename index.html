@@ -17,18 +17,17 @@
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/insightControl.js"></script>	
-		<script src="js/stocChart.min.js"></script>	
+		<script src="js/stocChart.js"></script>	
         <script src="js/bootstrap-toggle.js"></script>
+		<script src="js/jszip.js"></script>
+        <script src="js/xlsx.js"></script>
+        <script src="js/shim.js"></script>
 	</head>
 	
 	<body>
     
-    
+		<input type="file" id="importFile" ></input> 
 		<div ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
-        
-
-
-
 		<header>
 			<div class="logo"> <a  href="javascript:void(0); "> <img  src="img/logo.png" alt="#"/></a></div>
 			<ul class="top-nav">
@@ -65,7 +64,7 @@
 					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
 					<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
 					<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
-                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Competition Analysis</a></li>
+                    <li role="presentation"><a href="#competitionAnalysis" aria-controls="competitionAnalysis" role="tab" data-toggle="tab">Competition Analysis</a></li>
 				</ul>
 				
 				<!-- Tab panes -->
@@ -74,7 +73,7 @@
 					
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="s1" alt="" >
+								<img src="thum/sales.png" id="s1" alt="" >
 							<h2 class="boxtitle">Total sales per channel</h2> </div>
 							
 						</div>
@@ -82,7 +81,7 @@
 						
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="s2" alt="" >
+								<img src="thum/sales.png" id="s2" alt="" >
 							<h2 class="boxtitle">Top performer products</h2> </div>
 							
 						</div>
@@ -90,7 +89,7 @@
 						
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png"  id="s3" alt="" >
+								<img src="thum/sales.png"  id="s3" alt="" >
 							<h2 class="boxtitle">Worst performer products</h2> </div>
 							
 						</div>
@@ -98,14 +97,14 @@
 						
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png"  id="s4" alt="" >
+								<img src="thum/sales.png"  id="s4" alt="" >
 							<h2 class="boxtitle">share of sales</h2> </div>
 							
 						</div>
 						
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png"  id="s5"	 alt="" >
+								<img src="thum/sales.png"  id="s5"	 alt="" >
 							<h2 class="boxtitle">Competition best sellers</h2> </div>
 							
 						</div>
@@ -119,7 +118,7 @@
 						
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="p1" alt="" >
+								<img src="thum/promos.png" id="p1" alt="" >
 							<h2 class="boxtitle">Promo 1</h2> </div>
 							
 						</div>
@@ -127,7 +126,7 @@
 						
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="p2" alt="" >
+								<img src="thum/promos.png" id="p2" alt="" >
 							<h2 class="boxtitle">Promo 2</h2> </div>
 							
 						</div>
@@ -135,7 +134,7 @@
 						
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="p3" alt="">
+								<img src="thum/promos.png" id="p3" alt="">
 							<h2 class="boxtitle">Promo 3</h2> </div>
 						</div>
 						
@@ -146,63 +145,90 @@
 						
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp1" alt="" >
+								<img src="thum/digital.png" id="dp1" alt="" >
 							<h2 class="boxtitle">Not listed products</h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp2" alt="" >
+								<img src="thum/digital.png" id="dp2" alt="" >
 							<h2 class="boxtitle">out of stock products</h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp3" alt="" >
+								<img src="thum/digital.png" id="dp3" alt="" >
 							<h2 class="boxtitle"> Best sellers </h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp4" alt="" >
+								<img src="thum/digital.png" id="dp4" alt="" >
 							<h2 class="boxtitle">Product with inconsistent/bad ratings</h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp5" alt="" >
+								<img src="thum/digital.png" id="dp5" alt="" >
 							<h2 class="boxtitle">First rank of pepsi's product</h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp6" alt="" >
+								<img src="thum/digital.png" id="dp6" alt="" >
 							<h2 class="boxtitle">Competition Products</h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp7" alt="" >
+								<img src="thum/digital.png" id="dp7" alt="" >
 							<h2 class="boxtitle">category on a channel</h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp8" alt="" >
+								<img src="thum/digital.png" id="dp8" alt="" >
 							<h2 class="boxtitle">brand wise list</h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp9" alt="" >
+								<img src="thum/digital.png" id="dp9" alt="" >
 							<h2 class="boxtitle">List of products</h2> </div>
 							
 						</div>
 						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 							<div class="thum-box">
-								<img src="img/chart.png" id="dp10" alt="" >
+								<img src="thum/digital.png" id="dp10" alt="" >
 							<h2 class="boxtitle">List of products</h2> </div>
 						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane col-sm-12 competitionAnalysis" id="competitionAnalysis" >
+						
+						
+						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+							<div class="thum-box">
+								<img src="thum/competitionAnalysis.png" id="ca1" alt="" >
+							<h2 class="boxtitle">Competition Analysis 1</h2> </div>
+							
+						</div>
+						
+						
+						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+							<div class="thum-box">
+								<img src="thum/competitionAnalysis.png" id="ca2" alt="" >
+							<h2 class="boxtitle">Competition Analysis 2</h2> </div>
+							
+						</div>
+						
+						
+						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+							<div class="thum-box">
+								<img src="thum/competitionAnalysis.png" id="ca3" alt="">
+							<h2 class="boxtitle">Competition Analysis 3</h2> </div>
+						</div>
+						
+						
 					</div>
 				</div>		
 			</div>

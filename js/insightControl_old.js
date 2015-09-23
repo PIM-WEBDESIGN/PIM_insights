@@ -169,9 +169,7 @@ var insightManager = {
 		'<h3 class="box-title"> <i class="fa fa-lightbulb-o" ></i>'+ headingName +'</h3>';
 		
 		var commonTemp = '<div class="box-tools pull-right" id='+ id +'>'+
-		'<button type="button" class="btn btn-box-tool" data-widget="remove"><button  class="btn btn-info btn-xs btn-toggle-left button-list-group left" > <i class="fa fa-line-chart"></i>'+
-'</button><button class="btn  btn-xs btn-toggle-right button-list-group right"> <i class="fa fa-list-ul"></i>'+
-'</button> <i class="fa fa-times delete"></i>'+
+		'<button type="button" class="btn btn-box-tool" data-widget="remove"><button  class="btn btn-info btn-xs btn-toggle-left button-list-group left" > Top Performers </button><button class="btn  btn-xs btn-toggle-right button-list-group right">View Complete List  </button> <i class="fa fa-times delete"></i>'+
 		'</button>'+
 		'</div>'+
 		'</div>'+
@@ -233,32 +231,27 @@ var insightManager = {
 		var container ;
 		if(id in mapper["sales"]){
 			headingName = mapper["sales"][id]; 
-			var midtemplate = '<img src="thum/sales.png" id="'+id+'" alt="" >';
 			container = $($('.tabPanel').find('.sales'));
 		}
 		else if(id in mapper["digital"]){
 			headingName = mapper["digital"][id]; 
-			var midtemplate = '<img src="thum/digital.png" id="'+id+'" alt="" >';
 			container = $($('.tabPanel').find('.digital'));
 		}
 		else if(id in mapper["promos"]){
 			headingName = mapper["promos"][id] ;
-			var midtemplate = '<img src="thum/promos.png" id="'+id+'" alt="" >';
 			container = $($('.tabPanel').find('.promos'));
 		}
 		else{
 			headingName = mapper["competitionAnalysis"][id] ;
-			var midtemplate = '<img src="thum/competitionAnalysis.png" id="'+id+'" alt="" >';
 			container = $($('.tabPanel').find('.competitionAnalysis'));
 		}
 		
-		var firsttemplate = '<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
-		'<div class="thum-box">';
-		
-		var lasttemplate = '<h2 class="boxtitle">'+ headingName +'</h2> </div>'+
+		var template = '<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">'+
+		'<div class="thum-box">'+
+		'<img src="img/chart.png" id="'+id+'" alt="" >'+
+		'<h2 class="boxtitle">'+ headingName +'</h2> </div>'+
 		'</div>';
 		
-		var template = firsttemplate + midtemplate + lasttemplate;
 		container.append(template);
 		
 	},
@@ -284,7 +277,7 @@ var insightManager = {
 		var tempList = insightManager.salesChartArray;
 		console.log(insightManager.salesChartArray);
 		
-		var textStyleConfg={"font-family":" 'Maven Pro',sans-serif","font-size":8,"background":"none","font-color":"black","tick-font-color":"#a7a7a7","legendTextColor":"white","font-weight":400,"xLabelColor":"#a7a7a7","yLabelColor":"#a7a7a7","chartTitleColor":"#a7a7a7","titleFontSize":8,"gridLineColor":"#353b37"};
+		var textStyleConfg={"font-family":" 'Maven Pro',sans-serif","font-size":8,"background":"none","font-color":"black","tick-font-color":"#a7a7a7","legendTextColor":"white","font-weight":"bold","xLabelColor":"#a7a7a7","yLabelColor":"#a7a7a7","chartTitleColor":"#a7a7a7","titleFontSize":14,"gridLineColor":"#353b37"};
 		
 		
 		var data =
@@ -301,7 +294,7 @@ var insightManager = {
 				}, {
 				"yTick": "03 Step",
 				"yData": 121,
-				"color": "#7FFFD4"
+				"color": "#FF9E01"
 				}, {
 				"yTick": "04 Step",
 				"yData": 100,
@@ -335,12 +328,12 @@ var insightManager = {
 	drawDigitalChart : function(id){
 		var data = {
 			"yAxisData" : [],
-			"lowerColorArray":["#1ab977","#ee1d79","#7FFFD4","#f1b02e","#fe0000"],
+			"lowerColorArray":["#1ab977","#ee1d79","#942284","#f1b02e","#fe0000"],
 			"upperColor":"#e6e6e6",
 			"imagesArray" :["logo/img5.png","logo/img1.png","logo/img3.png","logo/img6.png","logo/img7.png"],
 			"threeDPathColor":"#f7fbf4",
 			"xAxisData" : [],
-			"unit" : ""
+			"unit" : "%"
 		}
 		
 		var textStyleConfg={"font-family":" 'Maven Pro',sans-serif","font-size":8,"background":"none","font-color":"black","tick-font-color":"#a7a7a7","legendTextColor":"white","font-weight":400,"xLabelColor":"white","yLabelColor":"white","chartTitleColor":"white","titleFontSize":16,"gridLineColor":"#353b37"};
