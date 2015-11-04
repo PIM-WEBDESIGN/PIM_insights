@@ -47,7 +47,7 @@
 					<ul class="top-nav">
 						<li class="competition" ><a href="#"  class="active" data="competition">Comparative Study</a></li>
 						<li></li>
-						
+						<div class="bottom"></div>
 					</ul>
                     
                     
@@ -96,9 +96,7 @@
 					
 					<ul class="user  pull-right" >
 						
-						<li>
-							<img src="img/saveaspdf.png" style="cursor : pointer" id="saveAsPDF">
-						</li>
+					
 						<li>	
 							<span >Welcome to Mr Johan Smith</span>
 						</li>
@@ -115,20 +113,20 @@
 					
 					<div class="total-sale">
 						<b>  TOTAL SALES </b>
-						<span class="value" id="totalSales"><i class="fa fa-inr"></i></span>
+						<span class="value"><i class="fa fa-inr"></i><span id="totalSales"></span></span>
 					</div>
 					
 					<div class="btn-group btn-date-time">
-						
+						<i class="fa fa-sort-desc" id="dateArrow"></i>
 						<input type="text" id="dtp" class="btn btn-danger btn-date btn-md"> </input> 
-						
 					</div>
-					
-					<a href="#" class="btn btn-danger btn-md pull-right btn-delete" id="deleteAll" >
-						<span class="fa fa-trash"></span> Delete All 
+							<a href="#" class="btn btn-danger btn-md pull-right btn-delete" id="saveAsPDF" style="margin-right:55px;" >
+						<span class="fa fa-arrow-circle-o-down"></span> Save as PDF
 					</a>
-					
-					
+					<a href="#" class="btn btn-danger btn-md pull-right btn-delete" id="deleteAll" >
+						 Clear All
+					</a>
+				
 					
 				</div>
 				
@@ -223,6 +221,7 @@
 										<img src="thum/promos5.jpg" id="ap4" alt="">
 									<h2 class="boxtitle">Promo 5</h2> </div>
 								</div>
+								
 								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
 									<div class="thum-box">
 										<img src="thum/promos6.jpg" id="ap5" alt="">

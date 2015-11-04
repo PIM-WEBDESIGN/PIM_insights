@@ -107,7 +107,6 @@ init : function(){
 	insightManager.previousChannel = "competition";
 	//insightManager.hostname = "http://52.6.40.198/IDB2SQL2";
 	//insightManager.hostnameDigital = "http://52.6.40.198"
-	//insightManager.hostnameDigital = "http://192.168.1.110:8080";
 	var protocol = window.location.protocol;
 	var location = window.location.host;		
 	
@@ -154,7 +153,7 @@ interpolateTotalSalesValue : function(value){
 		console.log(value);
 		//$($(document).find('.txt')).text(value);
 		
-		$('#totalSales').text(value);
+		$('#totalSales').text(" " + value);
 		/*var val = Math.round(value * 100) / 100
 			var start_val = 0,
 			duration = 4000,
@@ -195,12 +194,12 @@ changeDate : function(month , year){
 	
 	if(month == undefined || year == undefined || month == "" || year == "" ){
 		var date = new Date();
-		month =  date.getMonth();
+		month =  date.getMonth() - 1;
 		year  = date.getFullYear();
 	}
 	
 	$($('.datepicker-months').find('span')).removeClass('active');
-	$($('.datepicker-months').find('span')[month - 1]).addClass('active');
+	$($('.datepicker-months').find('span')[month -1]).addClass('active');
 	
 	
 	//$('.datepicker-months').find('span')[month].addClass('active');
@@ -2725,15 +2724,15 @@ drawPromosChart : function(id,chartType){
 var headingAndApiMapper  = {
 	"grocermax" :{
 		"sales" : {
-			"grocermaxs0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":9 , "string" : "brandName"  , "value" : "saleValue"},
+			"grocermaxs0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":9 , "string" : "brandName"  , "value" : "saleValue"},
 			
-			"grocermaxs1" : {"name" : "Top performer products Specific Brand Wise " , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  9 },  			
+			"grocermaxs1" : {"name" : "Top performer products Specific Brand Wise (Top 5)" , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  9 },  			
 			
-			"grocermaxs2" : {"name" : "Top performer products City Wise " , "api" : "/app/sale/city/getProductSaleByCityName" , "chartType" : "sales3" , "sortorder" : "desc" , "channelid" :  8 ,  "string" : "brandName"  , "value"  : "saleValue" },
+			"grocermaxs2" : {"name" : "Top performer products City Wise (Top 5)" , "api" : "/app/sale/city/getProductSaleByCityName" , "chartType" : "sales3" , "sortorder" : "desc" , "channelid" :  8 ,  "string" : "brandName"  , "value"  : "saleValue" },
 			
-			"grocermaxs3" : {"name" : "Top performer products " ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 9 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
+			"grocermaxs3" : {"name" : "Top performer products (Top 5)" ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 9 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
 			
-			"grocermaxs6" : {"name" : "Worst performer products ","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 9 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"}/*,
+			"grocermaxs6" : {"name" : "Worst performer products (Worst 5)","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 9 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"}/*,
 				
 				"grocermaxs7" : {"name" : "Worst performer products brand wise","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 9 ,"string" : "productName"  , "value" : "saleValue"},
 				
@@ -2744,68 +2743,68 @@ var headingAndApiMapper  = {
 	},
 	"srs" :{
 		"sales" : {
-			"srss0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":10 , "string" : "brandName"  , "value" : "saleValue"},
+			"srss0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":10 , "string" : "brandName"  , "value" : "saleValue"},
 			
-			"srss1" : {"name" : "Top performer products Specific Brand Wise " , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  10 },  			
+			"srss1" : {"name" : "Top performer products Specific Brand Wise (Top 5)" , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  10 },  			
 			
-			"srss3" : {"name" : "Top performer products " ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 10, "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
+			"srss3" : {"name" : "Top performer products (Top 5)" ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 10, "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
 			
-			"srss6" : {"name" : "Worst performer products ","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 10 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
+			"srss6" : {"name" : "Worst performer products (Worst 5)","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 10 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
 			
-			"srss7" : {"name" : "Worst performer products brand wise","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 10 ,"string" : "productName"  , "value" : "saleValue"}
+			"srss7" : {"name" : "Worst performer products brand wise (Worst 5)","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 10 ,"string" : "productName"  , "value" : "saleValue"}
 		}
 	},
 	"jbl" : {
 		"sales" : {
-			"jbls0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":11 , "string" : "brandName"  , "value" : "saleValue"},
+			"jbls0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":11 , "string" : "brandName"  , "value" : "saleValue"},
 		}
 		
 	},
 	"healthyworld":{
 		"sales" : {
-			"healthyworlds0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":12 , "string" : "brandName"  , "value" : "saleValue"},
+			"healthyworlds0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":12 , "string" : "brandName"  , "value" : "saleValue"},
 		}
 		
 	},
 	"zopnow":{
 		"sales" : {
-			"zopnows0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":13 , "string" : "brandName"  , "value" : "saleValue"},
+			"zopnows0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":13 , "string" : "brandName"  , "value" : "saleValue"},
 		}
 	},
 	"peppertap":{
 		"sales" : {
-			"peppertaps0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":15, "string" : "brandName"  , "value" : "saleValue"},
+			"peppertaps0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":15, "string" : "brandName"  , "value" : "saleValue"},
 		}
 	},
 	"kada":{
 		"sales" : {
-			"kadas0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":16 , "string" : "brandName"  , "value" : "saleValue"},
+			"kadas0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":16 , "string" : "brandName"  , "value" : "saleValue"},
 		}
 	},
 	"ziffstore" :{
 		"sales" : {
-			"ziffstores0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":14 , "string" : "brandName"  , "value" : "saleValue"},
+			"ziffstores0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":14 , "string" : "brandName"  , "value" : "saleValue"},
 			
-			"ziffstores1" : {"name" : "Top performer products Specific Brand Wise " , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  14 },  			
+			"ziffstores1" : {"name" : "Top performer products Specific Brand Wise (Top 5)" , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  14 },  			
 			
-			"ziffstores3" : {"name" : "Top performer products " ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 14 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
+			"ziffstores3" : {"name" : "Top performer products (Top 5)" ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 14 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
 			
-			"ziffstores6" : {"name" : "Worst performer products ","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 14 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
+			"ziffstores6" : {"name" : "Worst performer products (Worst 5)","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 14 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
 			
-			"ziffstores7" : {"name" : "Worst performer products brand wise","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 14 ,"string" : "productName"  , "value" : "saleValue"}
+			"ziffstores7" : {"name" : "Worst performer products brand wise (Worst 5)","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 14 ,"string" : "productName"  , "value" : "saleValue"}
 		}
 	},
 	"amazon" : {
 		"digital" : {
-			"adp0":{"name" : "products not listed" , "api" : "/insight/api/product/count/not-listed","chartType":"digital1","value":"total","string":"categoryid" },
-			"adp1": {"name" : "products listed" , "api" : "/insight/api/product/count/listed","chartType":"digital2" ,"value":"total","string":"productbrand"},
-			"adp2":{"name" : "out of stock products" , "api" : "/insight/api/product/count/oos","chartType":"digital3","value":"total","string":"brandbypim"},
+			"adp0":{"name" : "products not listed (Top 5)" , "api" : "/insight/api/product/count/not-listed","chartType":"digital1","value":"total","string":"categoryid" },
+			"adp1": {"name" : "products listed (Top 5)" , "api" : "/insight/api/product/count/listed","chartType":"digital2" ,"value":"total","string":"productbrand"},
+			"adp2":{"name" : "out of stock products (Top 5)" , "api" : "/insight/api/product/count/oos","chartType":"digital3","value":"total","string":"brandbypim"},
 			"adp3": {"name" :"Top Pepsi Product with rank on category page" ,"api":"/insight/api/graph/rank/lowest/by-category/","chartType" : "digital4","value":"productrank","string" : "productname"},
 			"adp4" :{"name" :"Product List Having No Image" ,"api":"/insight/api/graph/product/noImage/by-channel/","chartType" : "digital5","value":"","string" : "productname"},
 			"adp5" :{"name" :"List of Compition Products having price lower than Pepsi PRoducts" ,"api":"/insight/api/graph/products/compitition/lowerprice/","chartType" : "digital6","value":"productprice","string" : "productname"},
 			"adp6" : {"name" :"Share of products with different rating" ,"api":"/insight/api/graph/rating/count/by-group/","chartType" : "digital7"},
-			"adp7" : {"name" :"Amazon best selller recent oos" ,"api":"/insight/api/product/best-seller-recent-oos","chartType" : "digital8","value":"productrank","string" : "productname"},
-			"adp8" : {"name" :"Competition products with maximum customer ratings on a channel" ,"api":"/insight/api/product/compet-prod-max-rate","chartType" : "digital9","value":"averageproductrating","string" : "productname"},
+			"adp7" : {"name" :"Amazon best selller recent oos (Recent 5)" ,"api":"/insight/api/product/best-seller-recent-oos","chartType" : "digital8","value":"productrank","string" : "productname"},
+			"adp8" : {"name" :"Competition products with maximum customer ratings on a channel (Top 5)" ,"api":"/insight/api/product/compet-prod-max-rate","chartType" : "digital9","value":"averageproductrating","string" : "productname"},
 			
 		},/*
 		"digital" : {
@@ -2821,15 +2820,15 @@ var headingAndApiMapper  = {
 			
 		},*/
 		"sales" : {
-			"as0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":1 , "string" : "brandName"  , "value" : "saleValue"},
+			"as0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":1 , "string" : "brandName"  , "value" : "saleValue"},
 			
-			"as1" : {"name" : "Top performer products Specific Brand Wise " , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  1 },  			
+			"as1" : {"name" : "Top performer products Specific Brand Wise (Top 5)" , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  1 },  			
 			
-			"as3" : {"name" : "Top performer products " ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 1 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
+			"as3" : {"name" : "Top performer products (Top 5)" ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 1 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
 			
-			"as6" : {"name" : "Worst performer products ","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 1 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
+			"as6" : {"name" : "Worst performer products (Worst 5)","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 1 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
 			
-			"as7" : {"name" : "Worst performer products brand wise","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 1 ,"string" : "productName"  , "value" : "saleValue"}
+			"as7" : {"name" : "Worst performer products brand wise (Worst 5)","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 1 ,"string" : "productName"  , "value" : "saleValue"}
 		},
 		"promos" : {
 			"ap0" : {"name" : "Tracking accuracy of a promotion","chartType" : "promos1" },
@@ -2842,34 +2841,34 @@ var headingAndApiMapper  = {
 	},
 	"basket" : {
 		"digital" : {
-			"bbdp0":{"name" : "products not listed" , "api" : "/insight/api/product/count/not-listed","chartType":"digital1","value":"total","string":"categoryid" },
-			"bbdp1": {"name" : "products listed" , "api" : "/insight/api/product/count/listed","chartType":"digital2" ,"value":"total","string":"productbrand"},
-			"bbdp2":{"name" : "out of stock products" , "api" : "/insight/api/product/count/oos","chartType":"digital3","value":"total","string":"brandbypim"},
+			"bbdp0":{"name" : "products not listed (Top 5)" , "api" : "/insight/api/product/count/not-listed","chartType":"digital1","value":"total","string":"categoryid" },
+			"bbdp1": {"name" : "products listed (Top 5)" , "api" : "/insight/api/product/count/listed","chartType":"digital2" ,"value":"total","string":"productbrand"},
+			"bbdp2":{"name" : "out of stock products (Top 5)" , "api" : "/insight/api/product/count/oos","chartType":"digital3","value":"total","string":"brandbypim"},
 			"bbdp3": {"name" :"Top Pepsi Product with rank on category page" ,"api":"/insight/api/graph/rank/lowest/by-category/","chartType" : "digital4","value":"productrank","string" : "productname"},
 			"bbdp4" :{"name" :"Product List Having No Image" ,"api":"/insight/api/graph/product/noImage/by-channel/","chartType" : "digital5","value":"","string" : "productname"},
 			"bbdp5" :{"name" :"List of Compition Products having price lower than Pepsi PRoducts" ,"api":"/insight/api/graph/products/compitition/lowerprice/","chartType" : "digital6","value":"productprice","string" : "productname"}
 			
 		},
 		"sales" : {
-			"bbs0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":7 , "string" : "brandName"  , "value" : "saleValue" },
+			"bbs0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid":7 , "string" : "brandName"  , "value" : "saleValue" },
 			
-			"bbs1" : {"name" : "Top performer products Brand Wise " , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  7 ,  "string" : "brandName"  , "value"  : "saleValue" },  			
+			"bbs1" : {"name" : "Top performer products Brand Wise (Top 5)" , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  7 ,  "string" : "brandName"  , "value"  : "saleValue" },  			
 			
-			"bbs2" : {"name" : "Top performer products City Wise " , "api" : "/app/sale/city/getProductSaleByCityName" , "chartType" : "sales3" , "sortorder" : "desc" , "channelid" :  7 ,  "string" : "brandName"  , "value"  : "saleValue" },
+			"bbs2" : {"name" : "Top performer products City Wise (Top 5)" , "api" : "/app/sale/city/getProductSaleByCityName" , "chartType" : "sales3" , "sortorder" : "desc" , "channelid" :  7 ,  "string" : "brandName"  , "value"  : "saleValue" },
 			
-			"bbs3" : {"name" : "Top performer products " ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 7 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
+			"bbs3" : {"name" : "Top performer products (Top 5)" ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 7 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
 			
 			"bbs4" : {"name" : "% shares of category" , "api" : "/app/sale/category/getcategoryshare" , "chartType" : "sales5" , "sortorder" : "desc" , "channelid" : 7,"string" : "category_name"  , "value" : "sale_percentage"},
 			
-			"bbs6" : {"name" : "Worst performer products ","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 7 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
+			"bbs6" : {"name" : "Worst performer products (Worst 5)","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 7 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
 			
-			"bbs7" : {"name" : "Worst performer products brand wise","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 7 ,"string" : "productName"  , "value" : "saleValue"},
+			"bbs7" : {"name" : "Worst performer products brand wise (Worst 5)","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 7 ,"string" : "productName"  , "value" : "saleValue"},
 			
 			"bbs8" : {"name" : "City vs Brand","api" : "/app/sale/brand/getheatmapdata" , "chartType" : "sales9" ,"sortorder" :"desc","channelid" : 7 ,"string" : "productName"  , "value" : "saleValue"},
 			
-			"bbs9" : {"name" : "Total Sales Info CITY wise","api" : "/app/sale/city/getTotalSaleInfo" , "chartType" : "sales10" ,"sortorder" :"desc","channelid" : 7 ,"string" : "city"  , "value" : "saleValue"},
+			"bbs9" : {"name" : "Total Sales Info CITY wise (Top 5)","api" : "/app/sale/city/getTotalSaleInfo" , "chartType" : "sales10" ,"sortorder" :"desc","channelid" : 7 ,"string" : "city"  , "value" : "saleValue"},
 			
-			"bbs10" : {"name" : "Worst Sales Info in CITY ","api" : "/app/sale/city/getProductSaleByCityName" , "chartType" : "sales11" , "sortorder" : "asc" , "channelid" :  7 ,  "string" : "brandName"  , "value"  : "saleValue"}
+			"bbs10" : {"name" : "Worst Sales Info in CITY (Worst 5)","api" : "/app/sale/city/getProductSaleByCityName" , "chartType" : "sales11" , "sortorder" : "asc" , "channelid" :  7 ,  "string" : "brandName"  , "value"  : "saleValue"}
 		},
 		"promos" : {
 			"bbp0" : {"name" : "Tracking accuracy of a promotion","chartType" : "promos1" },
@@ -2882,9 +2881,9 @@ var headingAndApiMapper  = {
 	},
 	"banya" : {
 		"digital" : {
-			"bdp0":{"name" : "products not listed" , "api" : "/insight/api/product/count/not-listed","chartType":"digital1","value":"total","string":"categoryid" },
-			"bdp1": {"name" : "products listed" , "api" : "/insight/api/product/count/listed","chartType":"digital2" ,"value":"total","string":"productbrand"},
-			"bdp2":{"name" : "out of stock products" , "api" : "/insight/api/product/count/oos","chartType":"digital3",	"value":"total","string":"brandbypim"},
+			"bdp0":{"name" : "products not listed (Top 5)" , "api" : "/insight/api/product/count/not-listed","chartType":"digital1","value":"total","string":"categoryid" },
+			"bdp1": {"name" : "products listed (Top 5)" , "api" : "/insight/api/product/count/listed","chartType":"digital2" ,"value":"total","string":"productbrand"},
+			"bdp2":{"name" : "out of stock products (Top 5)" , "api" : "/insight/api/product/count/oos","chartType":"digital3",	"value":"total","string":"brandbypim"},
 			"bdp3": {"name" :"% of products with no rating, < 3 rating and >3" , "chartType" : "digital4"},
 			"bdp4": {"name" :"First rank of pepsi product" , "chartType" : "digital5"},
 			"bdp5": {"name" :"Competition Products with prices lower than PepsiCo products" , "chartType" : "digital6"},
@@ -2893,15 +2892,15 @@ var headingAndApiMapper  = {
 			"bdp8": {"name" :"Best sellers which recently went out of stock on Amazon" , "chartType" : "digital9"}
 		},
 		"sales" : {
-			"bs0" :{"name" : "Total sales per channel -  brand wise" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid" : 8 , "string" : "brandName"  , "value" : "saleValue" },
+			"bs0" :{"name" : "Total sales per channel -  brand wise (Top 5)" , "api" :"/app/sale/brand/getTotalSaleInfo" , "chartType" : "sales1" ,"sortorder" :"desc","channelid" : 8 , "string" : "brandName"  , "value" : "saleValue" },
 			
-			"bs1" : {"name" : "Top performer products Specific Brand Wise " , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  8 ,  "string" : "brandName"  , "value"  : "saleValue" },  			
+			"bs1" : {"name" : "Top performer products Specific Brand Wise (Top 5)" , "api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales2" , "sortorder" : "desc" , "channelid" :  8 ,  "string" : "brandName"  , "value"  : "saleValue" },  			
 			
-			"bs3" : {"name" : "Top performer products " ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 8 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
+			"bs3" : {"name" : "Top performer products (Top 5)" ,"api" :"/app/sale/product/getSaleInfo" , "chartType" : "sales4" ,"sortorder" :"desc","channelid" : 8 , "salecriteria" : "" , "string" : "productName"  , "value" : "saleValue"},		
 			
-			"bs6" : {"name" : "Worst performer products ","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 8 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
+			"bs6" : {"name" : "Worst performer products (Worst 5)","api" : "/app/sale/product/getSaleInfo" , "chartType" : "sales7" ,"sortorder" :"asc","channelid" : 8 , "salecriteria" : "", "string" : "productName"  , "value" : "saleValue"},
 			
-			"bs7" : {"name" : "Worst performer products brand wise","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 8 ,"string" : "productName"  , "value" : "saleValue"}
+			"bs7" : {"name" : "Worst performer products brand wise (Worst 5)","api" : "/app/sale/brand/getProductSaleByBrandName" , "chartType" : "sales8" ,"sortorder" :"asc","channelid" : 8 ,"string" : "productName"  , "value" : "saleValue"}
 		},
 		"promos" : {
 			"bp0" : {"name" : "Tracking accuracy of a promotion","chartType" : "promos1" },
@@ -2916,7 +2915,7 @@ var headingAndApiMapper  = {
 		"sales" : {
 			"cas0":{"name" : "Planned vs achieved sales numbers against a channel" , "api" : "" ,"chartType":"sales1"},
 			"cas1":{"name" : "Month on month growth of a channel" , "api" :"","chartType":"sales2"},
-			"cas2":{"name" : "Total Sales Of Channels" , "api" : "/app/sale/channel/getTotalSaleInfo" , "sortorder":"desc" , "chartType" : "sales3"},
+			"cas2":{"name" : "Total Sales Of Channels (Top 5)" , "api" : "/app/sale/channel/getTotalSaleInfo" , "sortorder":"desc" , "chartType" : "sales3"},
 			"cas3":{"name" : "% Growth in Month" ,"api" : "" , "chartType" : "sales4"}
 		}
 	}	
@@ -3005,4 +3004,16 @@ var string = {
 
 window.onload =  function(){
 	insightManager.hitApiForSession();	
+	
+
+	$("#dtp").click(function(){
+		//console.log('triggered');
+		$("#dtp").addClass("gray");
+	});
+	
+	$("#dateArrow").click(function(){
+		//console.log('s');
+		$("#dtp").trigger('click');
+		//$("#dtp").addClass("gray");
+	});
 }
