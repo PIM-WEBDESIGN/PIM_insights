@@ -13,230 +13,1146 @@
 		<link rel="stylesheet" href="css/theme.css">
 		<link rel="stylesheet" href="css/font-awesome.min.css">
         <link href="css/bootstrap-toggle.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<!-- Latest compiled and minified JavaScript -->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jspdf.min.js"></script>
+		<script src="js/html2canvas.js"></script>	
 		<script src="js/insightControl.js"></script>	
 		<script src="js/stocChart.js"></script>	
         <script src="js/bootstrap-toggle.js"></script>
 		<script src="js/jszip.js"></script>
         <script src="js/xlsx.js"></script>
         <script src="js/shim.js"></script>
-	</head>
-	
-	<body>
-    
-		<input type="file" id="importFile" ></input> 
-		<div ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
-		<header>
-			<div class="logo"> <a  href="javascript:void(0); "> <img  src="img/logo.png" alt="#"/></a></div>
-			<ul class="top-nav">
-				<li ><a href="#"class="active" >Amazon</a></li>
-				<li ><a href="#" >Big Basket</a></li>
-				<li><a href="#">Local Banya</a></li>
-				<li></li>
-				
-			</ul>
+		<script type="text/javascript" src="js/jquery.custom-select.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+		<body>
 			
-			<ul class="user  pull-right" >
-				
-				<li>
+			
+			
+			<!-- <input type="file" id="importFile" ></input>  -->
+			<div ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+				<header>
 					
 					
-					<span >Welcome to Mr Johan Smith</span>
+					
+					<div class="logo"> <a  href="javascript:void(0); "> <img  src="img/logo.png" alt="#"/></a></div>
+                    <div class="nav-toggle"><i class="fa fa-indent"></i> </div>
+                    
 					
 					
-				</li>
-				<!-- Control Sidebar Toggle Button -->
-				<li class="user-setting">
-					<a href="#" class="user-setting"><i class="fa fa-cog"></i>
-						<i class="fa fa-caret-down"></i>
+					
+					<ul class="top-nav">
+						<li class="competition" ><a href="#"  class="active" data="competition">Comparative Study</a></li>
+						<li></li>
+						
+					</ul>
+                    
+                    
+					
+					<div class="btn-nav-list " data-toggle="dropdown">
+						<div class="nav" id="currentActiveChannel">Channels</div>
+						<div class="btn-toggle">
+							<i class="fa fa-sort-desc"></i>
+						</div>
+					</div> 
+					
+					
+					
+					
+					<div class="dropdown-menu list-menu" role="menu" 
+					aria-labelledby="dLabel">
+						
+						<i class="fa fa-sort-asc arrow-top"></i>
+						<ul > 
+							<li data="basket"><a href="#" >Big Basket</a></li>
+							<li data="amazon"><a href="#" >Amazon</a></li>
+							<li data="banya"><a href="#" >Local Banya</a></li>
+							<li data="snapdeal"><a href="#" >Snapdeal</a></li>
+							<li data="flipkart"><a href="#" >Flipkart</a></li>
+							<li data="genric"><a href="#" >Genric</a></li>
+							<li data="paytm"><a href="#" >Paytm</a></li>
+							<li data="shopclue"><a href="#" >Shopclue</a></li>
+						</ul>
+						<ul > 
+							<li data="grocermax"><a href="#" >Grocermax</a></li>
+							<li data="srs"><a href="#" >Srs Grocery</a></li>
+							<li data="jbl"><a href="#" >Jbl</a></li>
+							<li data="healthyworld"><a href="#" >HealthyWorld</a></li>
+							<li data="zopnow"><a href="#" >Zopnow</a></li>
+							<li data="ziffstore"><a href="#" >Ziffstore</a></li>
+							<li data="peppertap"><a href="#" >Peppertap</a></li>
+							<li data="kada"><a href="#" >Kada</a></li>
+						</ul>
+						
+					
+						
+						
+					</div>
+					
+					
+					
+					<ul class="user  pull-right" >
+						
+						<li>
+							<img src="img/saveaspdf.png" style="cursor : pointer" id="saveAsPDF">
+						</li>
+						<li>	
+							<span >Welcome to Mr Johan Smith</span>
+						</li>
+						<!-- Control Sidebar Toggle Button -->
+						<li class="user-setting">
+							<a href="#" class="user-setting"><i class="fa fa-cog"></i>
+								<i class="fa fa-caret-down"></i>
+							</a>
+						</li>
+					</ul>
+				</header>
+				<div class="col-md-12 date-header">
+					
+					
+					<div class="total-sale">
+						<b>  TOTAL SALES </b>
+						<span class="value" id="totalSales"><i class="fa fa-inr"></i></span>
+					</div>
+					
+					<div class="btn-group btn-date-time">
+						
+						<input type="text" id="dtp" class="btn btn-danger btn-date btn-md"> </input> 
+						
+					</div>
+					
+					<a href="#" class="btn btn-danger btn-md pull-right btn-delete" id="deleteAll" >
+						<span class="fa fa-trash"></span> Delete All 
 					</a>
-				</li>
-			</ul>
-		</header>
-		<div class="content">
-			<div class="btn-slide">
-				<i id="arrow" class="fa fa-angle-double-left"></i>
-			</div>
-			<div class="tabPanel">
-				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
-					<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
-					<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
-                    <li role="presentation"><a href="#competitionAnalysis" aria-controls="competitionAnalysis" role="tab" data-toggle="tab">Competition Analysis</a></li>
-				</ul>
+					
+					
+					
+				</div>
 				
-				<!-- Tab panes -->
-				<div class="tab-content" > 
-					<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home">
-					
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/sales.png" id="s1" alt="" >
-							<h2 class="boxtitle">Total sales per channel</h2> </div>
-							
-						</div>
-						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/sales.png" id="s2" alt="" >
-							<h2 class="boxtitle">Top performer products</h2> </div>
-							
-						</div>
-						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/sales.png"  id="s3" alt="" >
-							<h2 class="boxtitle">Worst performer products</h2> </div>
-							
-						</div>
-						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/sales.png"  id="s4" alt="" >
-							<h2 class="boxtitle">share of sales</h2> </div>
-							
-						</div>
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/sales.png"  id="s5"	 alt="" >
-							<h2 class="boxtitle">Competition best sellers</h2> </div>
-							
-						</div>
-						
-						
-						
+				
+				
+				<div class="content show-data" id="amazon" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
 					</div>
-					
-					<div role="tabpanel" class="tab-pane col-sm-12 promos" id="profile" >
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							<!--<li role="presentation" id="competitionAnalysis"><a href="#competition" aria-controls="competition" role="tab" data-toggle="tab">Competition Analysis</a></li>-->
+						</ul>
 						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/promos.png" id="p1" alt="" >
-							<h2 class="boxtitle">Promo 1</h2> </div>
+						<!-- Tab panes -->
+						<div class="tab-content" > 
 							
-						</div>
-						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/promos.png" id="p2" alt="" >
-							<h2 class="boxtitle">Promo 2</h2> </div>
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home">
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="as0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales2.jpg" id="as1" alt="" >
+									<h2 class="boxtitle">Brand Wise Sales Info</h2> </div>
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales4.jpg" id="as3" alt="" >
+									<h2 class="boxtitle">Top performer Products Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales7.jpg" id="as6" alt="" >
+									<h2 class="boxtitle">Worst performer products wise</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales8.jpg" id="as7" alt="" >
+									<h2 class="boxtitle">Worst performer products Brand Wise Sales Info</h2> </div>
+								</div>
+								
+								
+								
+								
+							</div>
 							
-						</div>
-						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/promos.png" id="p3" alt="">
-							<h2 class="boxtitle">Promo 3</h2> </div>
-						</div>
-						
-						
+							<div role="tabpanel" class="tab-pane col-sm-12 promos" id="profile" >
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos1.jpg" id="ap0" alt="" >
+									<h2 class="boxtitle">Promo 1</h2> </div>
+									
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos2.jpg" id="ap1" alt="" >
+									<h2 class="boxtitle">Promo 2</h2> </div>
+									
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos3.jpg" id="ap2" alt="" >
+									<h2 class="boxtitle">Promo 3</h2> </div>
+									
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos4.jpg" id="ap3" alt="">
+									<h2 class="boxtitle">Promo 4</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos5.jpg" id="ap4" alt="">
+									<h2 class="boxtitle">Promo 5</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos6.jpg" id="ap5" alt="">
+									<h2 class="boxtitle">Promo 6</h2> </div>
+								</div>
+								
+							</div>
+							
+							<div role="tabpanel" class="tab-pane col-sm-12 digital" id="messages"> 
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital1.jpg" id="adp0" alt="" >
+									<h2 class="boxtitle">Not listed products</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital2.jpg" id="adp1" alt="" >
+									<h2 class="boxtitle">listed products</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital3.jpg" id="adp2" alt="" >
+									<h2 class="boxtitle">out of stock products</h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital4.jpg" id="adp3" alt="" >
+									<h2 class="boxtitle">Top Pepsi Product with rank on category page</h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital5.jpg" id="adp4" alt="" >
+									<h2 class="boxtitle">Product List Having No Image By Channel</h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital6.jpg" id="adp5" alt="" >
+									<h2 class="boxtitle">List of Compition Products having price lower than Pepsi PRoducts</h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital7.jpg" id="adp6" alt="" >
+									<h2 class="boxtitle">Share of products with different rating </h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital8.jpg" id="adp7" alt="" >
+									<h2 class="boxtitle">Amazon best selller recent oos</h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital9.jpg" id="adp8" alt="" >
+									<h2 class="boxtitle">Competition products with maximum customer ratings on a channel</h2> </div>	
+								</div>
+								
+							</div>
+						</div>		
 					</div>
-					
-					<div role="tabpanel" class="tab-pane col-sm-12 digital" id="messages"> 
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp1" alt="" >
-							<h2 class="boxtitle">Not listed products</h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp2" alt="" >
-							<h2 class="boxtitle">out of stock products</h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp3" alt="" >
-							<h2 class="boxtitle"> Best sellers </h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp4" alt="" >
-							<h2 class="boxtitle">Product with inconsistent/bad ratings</h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp5" alt="" >
-							<h2 class="boxtitle">First rank of pepsi's product</h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp6" alt="" >
-							<h2 class="boxtitle">Competition Products</h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp7" alt="" >
-							<h2 class="boxtitle">category on a channel</h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp8" alt="" >
-							<h2 class="boxtitle">brand wise list</h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp9" alt="" >
-							<h2 class="boxtitle">List of products</h2> </div>
-							
-						</div>
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/digital.png" id="dp10" alt="" >
-							<h2 class="boxtitle">List of products</h2> </div>
-						</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
 					</div>
-					<div role="tabpanel" class="tab-pane col-sm-12 competitionAnalysis" id="competitionAnalysis" >
-						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/competitionAnalysis.png" id="ca1" alt="" >
-							<h2 class="boxtitle">Competition Analysis 1</h2> </div>
-							
-						</div>
-						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/competitionAnalysis.png" id="ca2" alt="" >
-							<h2 class="boxtitle">Competition Analysis 2</h2> </div>
-							
-						</div>
-						
-						
-						<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
-							<div class="thum-box">
-								<img src="thum/competitionAnalysis.png" id="ca3" alt="">
-							<h2 class="boxtitle">Competition Analysis 3</h2> </div>
-						</div>
-						
-						
+				</div>
+				<!-- This div is added by me  -->
+				<div class="content show-data" id="basket" style="display:none;">
+					<div class="btn-slide">
+						<i class="  arrow fa fa-angle-double-left"></i>
 					</div>
-				</div>		
-			</div>
-			<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
-			</div>
-		</div>
-		</div>
-	</div>
-	</body>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home1" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile1" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages1" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home1">
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="bbs0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales2.jpg" id="bbs1" alt="" >
+									<h2 class="boxtitle"> Brand Wise Sales Info </h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales3.jpg" id="bbs2" alt="" >
+									<h2 class="boxtitle"> City Wise Sales Info </h2> </div>
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales4.jpg" id="bbs3" alt="" >
+									<h2 class="boxtitle">Top performer Products Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales5.jpg" id="bbs4" alt="" >
+									<h2 class="boxtitle">% share of Categories</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales7.jpg" id="bbs6" alt="" >
+									<h2 class="boxtitle">Worst performer products wise</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales8.jpg" id="bbs7" alt="" >
+									<h2 class="boxtitle">Worst performer products Brand Wise Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales9.jpg" id="bbs8" alt="" >
+									<h2 class="boxtitle">City vs Brand Sales</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales10.jpg" id="bbs9" alt="" >
+									<h2 class="boxtitle">Total Sales info City Wise</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales11.jpg" id="bbs10" alt="" >
+									<h2 class="boxtitle">Worst Sales info City Wise</h2> </div>
+								</div>
+								
+							</div>
+							
+							<div role="tabpanel" class="tab-pane col-sm-12 promos" id="profile1" >
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos1.jpg" id="bbp0" alt="" >
+									<h2 class="boxtitle">Promo 1</h2> </div>
+									
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos2.jpg" id="bbp1" alt="" >
+									<h2 class="boxtitle">Promo 2</h2> </div>
+									
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos3.jpg" id="bbp2" alt="" >
+									<h2 class="boxtitle">Promo 3</h2> </div>
+									
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos4.jpg" id="bbp3" alt="">
+									<h2 class="boxtitle">Promo 4</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos5.jpg" id="bbp4" alt="">
+									<h2 class="boxtitle">Promo 5</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos6.jpg" id="bbp5" alt="">
+									<h2 class="boxtitle">Promo 6</h2> </div>
+								</div>
+								
+								
+							</div>
+							
+							<div role="tabpanel" class="tab-pane col-sm-12 digital" id="messages1"> 
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital1.jpg" id="bbdp0" alt="" >
+									<h2 class="boxtitle">Not listed products</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital2.jpg" id="bbdp1" alt="" >
+									<h2 class="boxtitle">listed products</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital3.jpg" id="bbdp2" alt="" >
+									<h2 class="boxtitle">out of stock products</h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital4.jpg" id="bbdp3" alt="" >
+									<h2 class="boxtitle">Top Pepsi Product with rank on category page</h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital5.jpg" id="bbdp4" alt="" >
+									<h2 class="boxtitle">Product List Having No Image By Channel</h2> </div>	
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital6.jpg" id="bbdp5" alt="" >
+									<h2 class="boxtitle">List of Compition Products having price lower than Pepsi PRoducts</h2> </div>	
+								</div>
+								
+								
+								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				
+				<!-- div closed  BIG BASKET-->
+				
+				<div class="content show-data" id="banya" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="bs0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales2.jpg" id="bs1" alt="" >
+									<h2 class="boxtitle">Brand Wise Sales Info</h2> </div>
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales4.jpg" id="bs3" alt="" >
+									<h2 class="boxtitle">Top performer Products Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales7.jpg" id="bs6" alt="" >
+									<h2 class="boxtitle">Worst performer products wise</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales8.jpg" id="bs7" alt="" >
+									<h2 class="boxtitle">Worst performer products Brand Wise Sales Info</h2> </div>
+								</div>
+							</div>
+							
+							<div role="tabpanel" class="tab-pane col-sm-12 promos" id="profile2" >
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos1.jpg" id="bp0" alt="" >
+									<h2 class="boxtitle">Promo 1</h2> </div>
+									
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos2.jpg" id="bp1" alt="" >
+									<h2 class="boxtitle">Promo 2</h2> </div>
+									
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos3.jpg" id="bp2" alt="" >
+									<h2 class="boxtitle">Promo 3</h2> </div>
+									
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos4.jpg" id="bp3" alt="">
+									<h2 class="boxtitle">Promo 4</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos5.jpg" id="bp4" alt="">
+									<h2 class="boxtitle">Promo 5</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/promos6.jpg" id="bp5" alt="">
+									<h2 class="boxtitle">Promo 6</h2> </div>
+								</div>
+								
+								
+							</div>
+							
+							<div role="tabpanel" class="tab-pane col-sm-12 digital" id="messages2"> 
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital1.jpg" id="bdp0" alt="" >
+									<h2 class="boxtitle">Not listed products</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital2.jpg" id="bdp1" alt="" >
+									<h2 class="boxtitle">listed products</h2> </div>
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital3.jpg" id="bdp2" alt="" >
+									<h2 class="boxtitle">out of stock products</h2> </div>	
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital4.jpg" id="bdp3" alt="" >
+									<h2 class="boxtitle">% of products with no rating, less than 3 rating, more than 3 rating</h2> </div>	
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital5.jpg" id="bdp4" alt="" >
+									<h2 class="boxtitle">First rank of pepsi product</h2> </div>	
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital6.jpg" id="bdp5" alt="" >
+									<h2 class="boxtitle">Competition Products with prices lower than PepsiCo products</h2> </div>	
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital7.jpg" id="bdp6" alt="" >
+									<h2 class="boxtitle">% of products with content mismatch on a channel</h2> </div>	
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital8.jpg" id="bdp7" alt="" >
+									<h2 class="boxtitle">Share of space of competition vs pepsi in a category on a channel</h2> </div>	
+								</div>
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/digital9.jpg" id="bdp8" alt="" >
+									<h2 class="boxtitle">Best sellers which recently went out of stock on Amazon</h2> </div>	
+								</div>
+								
+							</div>
+							
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<!-- div closed  Baniya-->
+				<div class="content show-data" id="competition" style="display:block;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home3" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile3" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages3" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home3">
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/competitionsales1.jpg" id="cas0" alt="" >
+									<h2 class="boxtitle">Planned vs achieved sales numbers against a channel</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/competitionsales2.jpg" id="cas1" alt="" >
+									<h2 class="boxtitle">Month on month growth of a channel</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/competitionsales3.jpg" id="cas2" alt="" >
+									<h2 class="boxtitle">Total Sales Per Channel</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/competitionsales4.jpg" id="cas3" alt="" >
+									<h2 class="boxtitle">% growth of a channel</h2> </div>
+								</div>
+								
+							</div>
+							
+							<div role="tabpanel" class="tab-pane col-sm-12 promos" id="profile3" >
+								
+								
+							</div>
+							
+							<div role="tabpanel" class="tab-pane col-sm-12 digital" id="messages3"> 
+								
+								
+							</div>
+							
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<div class="content show-data" id="flipkart" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								<!-- here divs will be there -->
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<div class="content show-data" id="snapdeal" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								<!-- here divs will be there -->
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<div class="content show-data" id="shopclue" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								<!-- here divs will be there -->
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<div class="content show-data" id="paytm" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								<!-- here divs will be there -->
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<!-- grocermax -->
+				
+				
+				<div class="content show-data" id="grocermax" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								
+								<!-- here divs will be there -->
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="grocermaxs0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales2.jpg" id="grocermaxs1" alt="" >
+									<h2 class="boxtitle">Brand Wise Sales Info</h2> </div>
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales4.jpg" id="grocermaxs3" alt="" >
+									<h2 class="boxtitle">Top performer Products Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales7.jpg" id="grocermaxs6" alt="" >
+									<h2 class="boxtitle">Worst performer products wise</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales8.jpg" id="grocermaxs7" alt="" >
+									<h2 class="boxtitle">Worst performer products Brand Wise Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+								<div class="thum-box">
+										<img src="thum/sales3.jpg" id="grocermaxs2" alt="" >
+									<h2 class="boxtitle"> City Wise Sales Info </h2> </div>
+								</div>
 
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales10.jpg" id="grocermaxs9" alt="" >
+									<h2 class="boxtitle">Total Sales info City Wise</h2> </div>
+								</div>
+
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales11.jpg" id="grocermaxs10" alt="" >
+									<h2 class="boxtitle">Worst Sales info City Wise</h2> </div>
+								</div>
+								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<!-- srs -->
+				<div class="content show-data" id="srs" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								
+								<!-- here divs will be there -->
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="srss0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales2.jpg" id="srss1" alt="" >
+									<h2 class="boxtitle">Brand Wise Sales Info</h2> </div>
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales4.jpg" id="srss3" alt="" >
+									<h2 class="boxtitle">Top performer Products Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales7.jpg" id="srss6" alt="" >
+									<h2 class="boxtitle">Worst performer products wise</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales8.jpg" id="srss7" alt="" >
+									<h2 class="boxtitle">Worst performer products Brand Wise Sales Info</h2> </div>
+								</div>
+								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<!-- JBL -->
+				
+				<div class="content show-data" id="jbl" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								
+								<!-- here divs will be there -->
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="jbls0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				
+				<!-- healthyworld -->
+				
+				
+				<div class="content show-data" id="healthyworld" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								
+								<!-- here divs will be there -->
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="healthyworlds0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				<!-- zopnow -->
+				
+				
+				<div class="content show-data" id="zopnow" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								
+								<!-- here divs will be there -->
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="zopnows0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				
+				<!-- ziffstore -->
+				<div class="content show-data" id="ziffstore" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								
+								<!-- here divs will be there -->
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="ziffstores0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales2.jpg" id="ziffstores1" alt="" >
+									<h2 class="boxtitle">Brand Wise Sales Info</h2> </div>
+								</div>
+								
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales4.jpg" id="ziffstores3" alt="" >
+									<h2 class="boxtitle">Top performer Products Sales Info</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales7.jpg" id="ziffstores6" alt="" >
+									<h2 class="boxtitle">Worst performer products wise</h2> </div>
+								</div>
+								
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales8.jpg" id="ziffstores7" alt="" >
+									<h2 class="boxtitle">Worst performer products Brand Wise Sales Info</h2> </div>
+								</div>
+								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<!-- peppertap -->
+				
+				
+				<div class="content show-data" id="peppertap" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								
+								<!-- here divs will be there -->
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="peppertaps0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				<!-- kada -->
+				
+				
+				<div class="content show-data" id="kada" style="display:none;">
+					<div class="btn-slide">
+						<i  class="arrow fa fa-angle-double-left"></i>
+					</div>
+					<div class="tabPanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" id="sales" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Sales</a></li>
+							<li role="presentation" id="promos"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">Promos</a></li>
+							<li role="presentation" id="digital"><a href="#messages2" aria-controls="messages" role="tab" data-toggle="tab">Digital Presence</a></li>
+							
+						</ul>
+						
+						<!-- Tab panes -->
+						<div class="tab-content" > 
+							
+							<button class="btn add-on-btn btn-sm" id="addAll"> <i class="fa fa-plus-circle"></i> Add All </button>
+							<div role="tabpanel" class="tab-pane col-sm-12 active sales" id="home2">
+								
+								<!-- here divs will be there -->
+								<div class="chart-thum" draggable="true" ondragstart="insightManager.ondragstart(event)">
+									<div class="thum-box">
+										<img src="thum/sales1.jpg" id="kadas0" alt="" >
+									<h2 class="boxtitle">Total brand Wise Sales Info</h2> </div>
+								</div>								
+							</div>
+						</div>		
+					</div>
+					<div class="row row-height" ondrop="insightManager.ondrop(event)" ondragover="insightManager.ondragover(event)">
+					</div>
+				</div>
+				
+				
+				<canvas id="canvas" width="425" height="320" style="display : none ; background-color : '#000' "></canvas>
+				<div id="loader-container" style="display : none"><img src="img/loader.gif" /></div> 
+			</div>
+		</div>
+	</body>
+	
 </html>
