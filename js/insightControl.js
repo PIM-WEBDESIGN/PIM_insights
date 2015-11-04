@@ -105,13 +105,13 @@ init : function(){
 	insightManager.bindEvents();
 	insightManager.currentActiveChannel = "competition";
 	insightManager.previousChannel = "competition";
-	//insightManager.hostname = "http://52.6.40.198/IDB2SQL2";
-	//insightManager.hostnameDigital = "http://52.6.40.198"
+	insightManager.hostname = "http://52.6.40.198/IDB2SQL2";
+	insightManager.hostnameDigital = "http://52.6.40.198"
 	var protocol = window.location.protocol;
 	var location = window.location.host;		
 	
-	insightManager.hostnameDigital = protocol + "//" + location;
-	insightManager.hostname = protocol + "//" + location + "/IDB2SQL2";	
+//	insightManager.hostnameDigital = protocol + "//" + location;
+//	insightManager.hostname = protocol + "//" + location + "/IDB2SQL2";	
 	
 	
 	insightManager.changeDate();

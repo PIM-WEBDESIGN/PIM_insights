@@ -380,7 +380,11 @@ z-index : 99;
 
 .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{ outline:none;}
 
-.btn-danger.focus, .btn-danger:focus{  border-color:#D0D0D0; color:#fff;}
+.btn-danger.focus, .btn-danger:focus{  border-color:#D0D0D0; color:#000;}
+
+.btn-danger.active.focus, .btn-danger.active:focus, .btn-danger.active:hover, .btn-danger:active.focus, .btn-danger:active:focus, .btn-danger:active:hover, .open>.dropdown-toggle.btn-danger.focus, .open>.dropdown-toggle.btn-danger:focus, .open>.dropdown-toggle.btn-danger:hover{ color:#000;}
+
+
 .box-big {
 	width  : 98% !important;
 	/*height : 600px	*/
@@ -394,7 +398,7 @@ z-index : 99;
 	font-weight:500; }
 .total-sale b{  width:140px; font-size:10px ; text-align:center; float:left;}
 span.value{ text-align:center; font-size:16px; clear:both; font-weight:bold; width:140px; float:left;}
-span.value i{ color:#CF0;} 
+span.value i{     color: #FFCA00;} 
 
 .btn-delete{margin-right:30px;}
 
