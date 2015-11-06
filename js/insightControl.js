@@ -11,6 +11,10 @@ var insightManager = {
 	salesChartArray : [],
 	sessionStorageJson : {},
 	currentActiveChannel : "",
+	length : 0,
+	counter : 0,
+	yPos : 0,
+	xPos : 0,
 	monthNametoIntMapping :{
 		"Jan" : 01 , "Feb" : 02 , "Mar" : 03 ,"Apr" : 04 ,"May" : 05 , "Jun" : 06 , "Jul" : 07 , "Aug" : 08 , "Sep" : 09 , "Oct" : 10 , "Nov" : 11 ,"Dec" : 12 
 	},
@@ -18,7 +22,7 @@ var insightManager = {
 		1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"
 	},
 	currentDate  : {"competition" :{"month" : "" , "year" : ""} , "basket" : {"month" : "" , "year" : ""} , "amazon" : {"month" : "" , "year" : ""} , "banya" : {"month" : "" , "year" : ""}, "snapdeal" : {"month" : "" , "year" : ""}, "flipkart" : {"month" : "" , "year" : ""}, "genric" : {"month" : "" , "year" : ""}, "paytm" : {"month" : "" , "year" : ""}, "shopclue" : {"month" : "" , "year" : ""}, "grocermax" : {"month" : "" , "year" : ""}, "srs" : {"month" : "" , "year" : ""}, "jbl" : {"month" : "" , "year" : ""}, "kada" : {"month" : "" , "year" : ""}, "healthyworld" : {"month" : "" , "year" : ""}, "zopnow" : {"month" : "" , "year" : ""}, "ziffstore" : {"month" : "" , "year" : ""}, "peppertap" : {"month" : "" , "year" : ""}},
-	doc : new jsPDF('p','pt', [1200,8000]),
+	doc : new jsPDF('p','pt', [1050,8000]),
 	hitApiForSession : function(){
 		/*
 			$.ajax({
@@ -105,13 +109,13 @@ init : function(){
 	insightManager.bindEvents();
 	insightManager.currentActiveChannel = "competition";
 	insightManager.previousChannel = "competition";
-	insightManager.hostname = "http://52.6.40.198/IDB2SQL2";
-	insightManager.hostnameDigital = "http://52.6.40.198"
+//	insightManager.hostname = "http://52.6.40.198/IDB2SQL2";
+//	insightManager.hostnameDigital = "http://52.6.40.198"
 	var protocol = window.location.protocol;
 	var location = window.location.host;		
 	
-//	insightManager.hostnameDigital = protocol + "//" + location;
-//	insightManager.hostname = protocol + "//" + location + "/IDB2SQL2";	
+	insightManager.hostnameDigital = protocol + "//" + location;
+	insightManager.hostname = protocol + "//" + location + "/IDB2SQL2";	
 	
 	
 	insightManager.changeDate();
@@ -225,12 +229,16 @@ onDateChanged : function(){
 bindEvents :  function(){
 	
 	$('#saveAsPDF').on('click',function(){
-		
+		insightManager.length = 0;
+		insightManager.counter = 0;
+		insightManager.xPos = 0;
+		insightManager.yPos = 0;
 		var svgs = $('#' + insightManager.currentActiveChannel +' .row').find('svg');
-		
-		var length = svgs.length;
+		insightManager.doc =  new jsPDF('p','pt', [1050,8000]);
+		insightManager.length = svgs.length;
 		//console.log(length);
-		insightManager.pdfGenerator(svgs,length,function(){
+		insightManager.pdfGenerator(svgs,insightManager.length,function(){
+			console.log(svgs);
 			insightManager.doc.save(insightManager.currentActiveChannel + '.pdf');
 		});
 		
@@ -355,13 +363,24 @@ bindEvents :  function(){
 	$(document).on('click','.dropdown-menu li',function(e) {
 		e.preventDefault();
 		var val = $($(this).find('a')).text();
-		if($('.competition').find('.active').length > 0){
-			$('.competition').find('.active').removeClass('active');	
-		}
 		var $target = $(this).attr('data');
-		//alert($target);
-		$('#currentActiveChannel').text(val);
-		insightManager.switchChannel($target);
+		
+		console.log(insightManager.previousChannel);
+		
+		if($target == insightManager.previousChannel){
+			console.log(insightManager.previousChannel);
+		}
+		else{
+			console.log(val);
+			if($('.competition').find('.active').length > 0){
+				$('.competition').find('.active').removeClass('active');	
+			}
+			//alert($target);
+			$('#currentActiveChannel').text(val);
+			insightManager.switchChannel($target);
+		}
+		
+		
 	});
 	
 	
@@ -517,15 +536,27 @@ switchChannel :  function($target){
 pdfGenerator : function(svgs,length,callback){
 	
 	if(length > 0){
-		var svgString = new XMLSerializer().serializeToString(svgs[length - 1]);
+		var svgString = new XMLSerializer().serializeToString(svgs[insightManager.counter]);
 		
-		var myString = $(svgs[length-1]).attr('id');
+		var myString = $(svgs[insightManager.counter]).attr('id');
+		
 		if(myString !=  undefined){
 			//console.log(length);
 			//console.log($(svgs[length-1]));
 			//console.log(myString);
 			myString = myString.replace("-svg",'');
 			myString = myString.replace("chart_",'');
+			
+			if(myString == "bbs8"){
+				var canvas = document.getElementById("heatMapCanvas");			
+				var ctx = canvas.getContext("2d");	
+				ctx.clearRect(0, 0,1200,320);
+			}
+			else{
+				var canvas = document.getElementById("canvas");			
+				var ctx = canvas.getContext("2d");	
+				ctx.clearRect(0, 0,425,320);
+			}
 			
 			if(headingAndApiMapper[insightManager.currentActiveChannel]["sales"].hasOwnProperty(myString)){
 				var text = headingAndApiMapper[insightManager.currentActiveChannel]["sales"][myString]["name"]; 	
@@ -540,10 +571,11 @@ pdfGenerator : function(svgs,length,callback){
 				
 			}
 			
+			/*
 			var canvas = document.getElementById("canvas");			
 			var ctx = canvas.getContext("2d");	
 			ctx.clearRect(0, 0,425,320);
-			
+			*/
 			var DOMURL = self.URL || self.webkitURL || self;
 			var img = new Image();
 			var svg = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
@@ -553,26 +585,63 @@ pdfGenerator : function(svgs,length,callback){
 				ctx.drawImage(img, 0, 0);
 				var png = canvas.toDataURL("image/png");
 				////console.log(png);
+				if(myString == "bbs8"){
+						
+					var x = 50;
+					
+					if(insightManager.xPos % 3 == 0){
+						var y = parseInt( (insightManager.yPos) / 3) * 400  + 50 ;
+						insightManager.yPos = insightManager.yPos + 3;  
+					}
+					else if(insightManager.xPos % 3 == 1){
+						var y = parseInt( (insightManager.yPos) / 3 + 1) * 400  + 50 ;
+						insightManager.yPos = insightManager.yPos + 5;  
+					}
+					else{
+						var y = parseInt( (insightManager.yPos) / 3 + 1) * 400  + 50 ;
+						insightManager.yPos = insightManager.yPos + 4;  
+					}
+					
+					
+					insightManager.xPos = 0;
+					
+					
+					insightManager.doc.setFontSize(12);
+			//		insightManager.doc.text(x, y, text);
+					var textLength = text.length*7;
+					var splitTitle = insightManager.doc.splitTextToSize(text, 500);
+					insightManager.doc.text(500-textLength*.5, y, splitTitle);
+					insightManager.doc.addImage(png,"JPEG",x,y+15,1000,300);
+				}
+				else{
+					
+					var  x = (insightManager.xPos%3) * 300 + 50; 
+					
+					insightManager.xPos++;
+					
+					var y =  parseInt( (insightManager.yPos) / 3) * 400  + 50 ; 
+					
+					insightManager.yPos++;
+					
+					insightManager.doc.setFontSize(12);
+			//		insightManager.doc.text(x, y, text);
+					
+					var splitTitle = insightManager.doc.splitTextToSize(text, 250);
+					insightManager.doc.text(x+10, y, splitTitle);
+					insightManager.doc.addImage(png,"JPEG",x,y+15,300,300);
+				}
 				
-				var modulo = (length - 1) % 3 ; 
-				
-				var  x = (modulo) * 300 + 50; 
-				
-				var y =  parseInt( (length -1)  / 3) * 400  + 50 ; 
-				
-				
-				
-				insightManager.doc.addImage(png,"JPEG",x,y,300,300);
-				length = length - 1;
-				insightManager.pdfGenerator(svgs,length,callback);
+				--insightManager.length;
+				++insightManager.counter;
+				insightManager.pdfGenerator(svgs,insightManager.length,callback);
 				DOMURL.revokeObjectURL(png);
 			};
 			img.src = url;
 			
 		}
 		else{
-			length =  length-1;
-			insightManager.pdfGenerator(svgs, length ,callback);
+			insightManager.length =  insightManager.length - 1;
+			insightManager.pdfGenerator(svgs, insightManager.length ,callback);
 		}
 		
 		
@@ -962,7 +1031,7 @@ appendFullList :  function(container,id){
 				temp += ' <div class="list-row"><div class="list-cell">'+tempList[i][headingKey]+'</div><div '+
 				'class="list-cell"></div></div>';
 			}
-		
+			
 		}
 		else{
 			var headingKey = headingAndApiMapper[insightManager.currentActiveChannel][currentType][id]["string"];
@@ -1396,7 +1465,7 @@ drawSalesChart : function(responseArray,id,chartType){
 		case "sales1" :{
 			//console.log(responseArray);
 			responseArray = responseArray["data"];
-			if(responseArray.length > 0){
+			if(responseArray.length > 0 && $('#chart_' +id).length < 1){
 				/*var data = 
 					{
 					"rank":[],
@@ -1488,7 +1557,7 @@ drawSalesChart : function(responseArray,id,chartType){
 			break;
 		}
 		case "sales2" : {
-			
+			console.log($('#chart_' +id).find('svg').length);
 			if(responseArray["products"].length > 0){
 				var colorArray = ["#f3aa1f","#cb1b6e","#7e3d97","#318dcc","#3dbfb7"];
 				
@@ -2371,30 +2440,30 @@ drawDigitalChart : function(responseArray,id,chartType){
 			if(responseArray.length > 0){
 				console.log(responseArray);
 				console.log($('#chart_' + id).width());
-			 var data =  {
-			  title : "",
-			  titleColor : "gray",
-			  yAxisLabel : "Profit",
-			  yAxisUnit : "",
-			  currencyUnit:"\u20B9",
-			  yAxisEstimateData : [],
-			  yAxisEstimateDataUnit : [],
-			  yAxisActualData : [],
-			  yAxisActualDataUnit : [],
-			  xAxisLabel : "",
-			  xAxisData : []
-			 }
-			var cnfg={"data":data};
-			var textStyleConfg={"font-family":" 'Maven Pro',sans-serif","font-size":12,"background":"none","font-color":"#a7a7a7","tick-font-color":"#a7a7a7","legendTextColor":"white","font-weight":400,"xLabelColor":"white","yLabelColor":"white","chartTitleColor":"white","titleFontSize":15,"gridLineColor":"#353b37"};
-			
-			var length  = responseArray.length;
+				var data =  {
+					title : "",
+					titleColor : "gray",
+					yAxisLabel : "Profit",
+					yAxisUnit : "",
+					currencyUnit:"\u20B9",
+					yAxisEstimateData : [],
+					yAxisEstimateDataUnit : [],
+					yAxisActualData : [],
+					yAxisActualDataUnit : [],
+					xAxisLabel : "",
+					xAxisData : []
+				}
+				var cnfg={"data":data};
+				var textStyleConfg={"font-family":" 'Maven Pro',sans-serif","font-size":12,"background":"none","font-color":"#a7a7a7","tick-font-color":"#a7a7a7","legendTextColor":"white","font-weight":400,"xLabelColor":"white","yLabelColor":"white","chartTitleColor":"white","titleFontSize":15,"gridLineColor":"#353b37"};
+				
+				var length  = responseArray.length;
 				
 				if(length > 5 ){
 					length = 5;	
 				}
 				
 				for(var i = 0 ; i <  length ; i++){
-						
+					
 					data["yAxisEstimateData"].push(parseInt(responseArray[i]["productprice"]))
 					data["yAxisEstimateDataUnit"].push(responseArray[i]["productname"])
 					data["yAxisActualData"].push(parseInt(responseArray[i]["compititorprice"]))
@@ -2405,11 +2474,11 @@ drawDigitalChart : function(responseArray,id,chartType){
 				}
 				
 				console.log(cnfg);
-			
-			
-			 var stocChart37=$('#chart_' + id).stocCharts(textStyleConfg);
-			 stocChart37.comparisonAnalysis(cnfg);
-		}	
+				
+				
+				var stocChart37=$('#chart_' + id).stocCharts(textStyleConfg);
+				stocChart37.comparisonAnalysis(cnfg);
+			}	
 			else{
 				
 				$('#chart_' + id).append(insightManager.noDataAvailable);	
@@ -2443,7 +2512,7 @@ drawDigitalChart : function(responseArray,id,chartType){
 			if(responseArray.length > 0){
 				var colorArray = ["#b4ff53","#ff555b","#e555ff","#4470b7","#717171"];
 				/*var data = 
-				{
+					{
 					"xAxisData" : [],
 					"color" : [],
 					"labelColor":[],
@@ -2451,19 +2520,19 @@ drawDigitalChart : function(responseArray,id,chartType){
 					"key" : [],
 					"backColor" :"#d1cfd0",
 					"unit" : ""
-				}	
-				
-				
-				var textStyleConfg={"font-family":"'Roboto', sans-serif","font-size":12,"background":"none","font-color":"white","tick-font-color":"#000","legendTextColor":"white","font-weight":400,"xLabelColor":"#000","yLabelColor":"#a7a7a7","chartTitleColor":"black","titleFontSize":10,"gridLineColor":"#353b37","font-description-size":12,"font-description-color":"#000","font-description-family":"Open Sans, sans-serif","font-description-weight":100,"font-heading-size":11,"font-heading-color":"black","font-heading-family":"Open Sans, sans-serif","font-heading-weight":10,"font-number-size":14,"font-number-color":"#000","font-number-family":"'Maven Pro',sans-serif","font-number-weight":800,"font-rank-size":16,"font-rank-color":"white","font-rank-family":"'Roboto', sans-serif","font-rank-weight":600};
-				
-				var length  = responseArray.length;
-				
-				if(length > 5 ){
+					}	
+					
+					
+					var textStyleConfg={"font-family":"'Roboto', sans-serif","font-size":12,"background":"none","font-color":"white","tick-font-color":"#000","legendTextColor":"white","font-weight":400,"xLabelColor":"#000","yLabelColor":"#a7a7a7","chartTitleColor":"black","titleFontSize":10,"gridLineColor":"#353b37","font-description-size":12,"font-description-color":"#000","font-description-family":"Open Sans, sans-serif","font-description-weight":100,"font-heading-size":11,"font-heading-color":"black","font-heading-family":"Open Sans, sans-serif","font-heading-weight":10,"font-number-size":14,"font-number-color":"#000","font-number-family":"'Maven Pro',sans-serif","font-number-weight":800,"font-rank-size":16,"font-rank-color":"white","font-rank-family":"'Roboto', sans-serif","font-rank-weight":600};
+					
+					var length  = responseArray.length;
+					
+					if(length > 5 ){
 					length = 5;	
-				}
-				
-				for(var i = 0 ; i <  length ; i++){
-						
+					}
+					
+					for(var i = 0 ; i <  length ; i++){
+					
 					data["xAxisData"].push(parseFloat(responseArray[i]["productrank"]))
 					data["color"].push(colorArray[i])
 					data["labelColor"].push(colorArray[i])
@@ -2471,12 +2540,12 @@ drawDigitalChart : function(responseArray,id,chartType){
 					data["key"].push(responseArray[i]["productname"])
 					
 					
-				}
-				
-				
-				
-				var stocChart55=$("#chart_" + id).stocCharts(textStyleConfg);
-				stocChart55.infographicBarChartWithPercentageAnalysis(data);
+					}
+					
+					
+					
+					var stocChart55=$("#chart_" + id).stocCharts(textStyleConfg);
+					stocChart55.infographicBarChartWithPercentageAnalysis(data);
 				*/
 				
 				var colorArray = ["#42a5f5","#ef5350","#5c6bc0","#66bb6a","#888888"];
@@ -2806,8 +2875,8 @@ var headingAndApiMapper  = {
 			"adp7" : {"name" :"Amazon best selller recent oos (Recent 5)" ,"api":"/insight/api/product/best-seller-recent-oos","chartType" : "digital8","value":"productrank","string" : "productname"},
 			"adp8" : {"name" :"Competition products with maximum customer ratings on a channel (Top 5)" ,"api":"/insight/api/product/compet-prod-max-rate","chartType" : "digital9","value":"averageproductrating","string" : "productname"},
 			
-		},/*
-		"digital" : {
+			},/*
+			"digital" : {
 			"adp0":{"name" : "products not listed" , "api" : "/crawlerweb/api/product/count/not-listed","chartType":"digital1","value":"total","string":"categoryid" },
 			"adp1": {"name" : "products listed" , "api" : "/crawlerweb/api/product/count/listed","chartType":"digital2" ,"value":"total","string":"productbrand"},
 			"adp2":{"name" : "out of stock products" , "api" : "/crawlerweb/api/product/count/oos","chartType":"digital3","value":"total","string":"brandbypim"},
@@ -3005,7 +3074,7 @@ var string = {
 window.onload =  function(){
 	insightManager.hitApiForSession();	
 	
-
+	
 	$("#dtp").click(function(){
 		//console.log('triggered');
 		$("#dtp").addClass("gray");

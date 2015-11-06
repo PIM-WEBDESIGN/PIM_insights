@@ -126,7 +126,7 @@ ul.user li.user-setting a{ background-color:#363f50; color:#FFF; border-radius:5
     position: absolute;
     min-height: 96%;
     right: -600px;
-    margin-top: -45px;
+    margin-top: -120px;
     transition-duration: 1150ms, 1150ms; padding-top:60px; }
 .tabPanel.active{ right:0;}
 
@@ -372,7 +372,7 @@ z-index : 99;
 .btn-date:hover, btn-date:focus{background:#eeeeee !important; border-color:#D0D0D0; color:#000;}
 .btn-danger.active, .btn-danger:active{ background-color:#eeeeee; border-color:#D0D0D0; color:#000; box-shadow:none;}
 
-.gray{background:#eeeeee !important;}
+/*.gray{background:#eeeeee !important;} */
 
 .btn-group > .btn:last-child:not(:first-child), .btn-group > .dropdown-toggle:not(:first-child){ border-radius:3px; }
 
@@ -591,23 +591,31 @@ span.value i{     color: #FFCA00;}
   height: 16px;
 }
 
-.btn-nav-list{ margin-top:10px; /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,1c5b7d+100 */
-background: #2b4f9e; /* Old browsers */
- height:30px; width:250px; float:left; cursor:pointer; border-radius:30px;}
-.btn-nav-list:hover{ opacity:0.7}
-.btn-nav-list .nav{ width:210px; float:left; padding:0 10px; line-height:30px; font-size:17px; color:#FFF;    font-family: 'swis721_ltex_btlight';}
-.btn-nav-list .btn-toggle{ text-align:center; font-size:22px; line-height:20px; padding:0; margin:0; width:40px; height:30px; background-color:#3a5ead; color:#FFF; float:right; border-top-right-radius:30px; border-bottom-right-radius:30px;}
+.btn-nav-list{ /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,1c5b7d+100 */
+background: #ffffff; /* Old browsers */
+ height:34px; width:250px; float:left; cursor:pointer; border-radius:3px; border-radius:3px; border:solid 1px #cccccc;}
+.btn-nav-list:hover{ background-color:#eeeeee; }
+.btn-nav-list .nav{ width:210px; float:left; padding:0 10px; line-height:30px; font-size:17px; color:#000;    font-family: 'swis721_ltex_btlight';}
+.btn-nav-list .nav:hover{}
+.btn-nav-list .btn-toggle{ text-align:center; line-height:20px; padding:0; margin:0; width:40px; height:34px;  color:#000; float:right; border-top-right-radius:3px; border-bottom-right-radius:3px;
+top: -25px;
+position: relative;}
 
 
 .list-menu{ padding:0px;
 
+
+position:absolute; width:460px;
+
 transition: all 3s ease-in-out 0.5s;
-margin-left: 290px;
-border: 1px solid #6cb1d9 !important;
-border-top:none !important;
+margin-left: 15px;
+border: 1px solid #d0d0d0 !important;
+
+
 box-shadow: 0px 7px 7px #CCCCCC !important;
 border-radius: 0px !important;
-margin-top: 0px;
+margin-top:2px;
+border-top-color:#d0d0d0  !important;
  }
 .list-menu ul{ 
  width:200px; float:left; padding:0px; margin:10px;  }
@@ -623,7 +631,7 @@ margin-top: 0px;
 
 
 .arrow-top{ position: absolute;
-left: 30px;
+left: 10px;
 color: #FFF;
 font-size: 30px !important;
-top: -12px;}
+top: -25px;}

@@ -50,8 +50,38 @@
 						<div class="bottom"></div>
 					</ul>
                     
-                    
+                
+				
 					
+					<ul class="user  pull-right" >
+						
+					
+						<li>	
+							<span >Welcome to Mr Johan Smith</span>
+						</li>
+						<!-- Control Sidebar Toggle Button -->
+						<li class="user-setting">
+							<a href="#" class="user-setting"><i class="fa fa-cog"></i>
+								<i class="fa fa-caret-down"></i>
+							</a>
+						</li>
+					</ul>
+				</header>
+				<div class="row date-header">
+					
+					<div class="col-md-3">
+					<div class="total-sale">
+						<b>  TOTAL SALES </b>
+						<span class="value"><i class="fa fa-inr"></i><span id="totalSales"></span></span>
+					</div> </div>
+						<div class="col-md-3">
+					<div class="btn-group btn-date-time">
+						<i class="fa fa-sort-desc" id="dateArrow"></i>
+						<input type="text" id="dtp" class="btn btn-danger btn-date btn-md"> </input> 
+					</div> </div>
+                    
+                    <div class="col-md-3">
+                    	
 					<div class="btn-nav-list " data-toggle="dropdown">
 						<div class="nav" id="currentActiveChannel">Channels</div>
 						<div class="btn-toggle">
@@ -65,7 +95,7 @@
 					<div class="dropdown-menu list-menu" role="menu" 
 					aria-labelledby="dLabel">
 						
-						<i class="fa fa-sort-asc arrow-top"></i>
+						<i class="fa arrow-top"><img src="img/arrow-top.png" alt="#"/> </i>
 						<ul > 
 							<li data="basket"><a href="#" >Big Basket</a></li>
 							<li data="amazon"><a href="#" >Amazon</a></li>
@@ -90,42 +120,16 @@
 					
 						
 						
-					</div>
+					</div> 
 					
-					
-					
-					<ul class="user  pull-right" >
-						
-					
-						<li>	
-							<span >Welcome to Mr Johan Smith</span>
-						</li>
-						<!-- Control Sidebar Toggle Button -->
-						<li class="user-setting">
-							<a href="#" class="user-setting"><i class="fa fa-cog"></i>
-								<i class="fa fa-caret-down"></i>
-							</a>
-						</li>
-					</ul>
-				</header>
-				<div class="col-md-12 date-header">
-					
-					
-					<div class="total-sale">
-						<b>  TOTAL SALES </b>
-						<span class="value"><i class="fa fa-inr"></i><span id="totalSales"></span></span>
-					</div>
-					
-					<div class="btn-group btn-date-time">
-						<i class="fa fa-sort-desc" id="dateArrow"></i>
-						<input type="text" id="dtp" class="btn btn-danger btn-date btn-md"> </input> 
-					</div>
+                    </div>
+                    <div class="col-md-3">
 							<a href="#" class="btn btn-default btn-md pull-right btn-delete" id="saveAsPDF" style="margin-right:55px;" >
 						<span class="fa fa-arrow-circle-o-down"></span> Save as PDF
 					</a>
 					<a href="#" class="btn btn-default btn-md pull-right btn-delete" id="deleteAll" >
 						 Clear All
-					</a>
+					</a> </div>
 				
 					
 				</div>
@@ -1149,6 +1153,7 @@
 				
 				
 				<canvas id="canvas" width="425" height="320" style="display : none ; background-color : '#000' "></canvas>
+				<canvas id="heatMapCanvas" width="1366px" height="320" style="display : none ; background-color : '#000' "></canvas>
 				<div id="loader-container" style="display : none"><img src="img/loader.gif" /></div> 
 			</div>
 		</div>

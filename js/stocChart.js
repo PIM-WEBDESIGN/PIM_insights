@@ -9413,12 +9413,14 @@ function sweep(d) {
                     .orient("left").ticks(5);
 
 
-                var svg = svgElement.append("svg")
+    /*            var svg = svgElement.append("svg")
                     .attr("width", widthHeatMap + margin.right / 2)
                     .attr("height", heightHeatMap + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + widthHeatMap*0.15 + "," + margin.top + ")");
-
+					*/
+				 var svg = svgElement.append("g")
+                    .attr("transform", "translate(" + widthHeatMap*0.15 + "," + margin.top + ")");
 
                 var heatMap = svg.selectAll("g")
                     .data(heatMapData, function (d) {
@@ -9544,12 +9546,12 @@ function sweep(d) {
                 widthMeter = width - marginMeter.left - marginMeter.right,
                     heightMeter = height - marginMeter.top - marginMeter.bottom;
 
-                var svgMeter = svgElement.append("svg")
+           /*     var svgMeter = svgElement.append("svg")
                     .attr("width", width - marginMeter.left + marginMeter.right)
                     .attr("height", heightMeter + marginMeter.top + marginMeter.bottom)
-                    .append("g");
+                    .append("g");*/
 				
-
+				  var svgMeter = svgElement.append("g");
 
 
                 var gradient = svgMeter
@@ -33071,307 +33073,7 @@ feMerge.append("feMergeNode")
 		}
 	
 	}
-	
-	var comparisonNewGraph = {
-		comparisonNewAnalysis:function(cnfg)
-		{
-				var yAxisEstimateData = cnfg.data.yAxisEstimateData;
-				var yAxisActualData = cnfg.data.yAxisActualData;
-				var xAxisData = cnfg.data.xAxisData;
-				var yAxisUnit = cnfg.data.yAxisUnit;
-				var yAxisLabel = cnfg.data.yAxisLabel;
-				var xAxisLabel = cnfg.data.xAxisLabel;
-				var title = cnfg.data.title;
-				var titleColor = cnfg.data.titleColor;
-				var yAxisEstimateDataUnit = cnfg.data.yAxisEstimateDataUnit;
-				var yAxisActualDataUnit = cnfg.data.yAxisActualDataUnit;
-				var currencyUnit= cnfg.data.currencyUnit;
-				var leftMargin = marginController.leftMarginController(yAxisEstimateData);
-				
-				var compareAnalChart={left:leftMargin,right:width*0.05,bottom:45,top:height*0.1,chartSeparator:5,xScalePaddingTop:height*0.2,yScalePaddingLeft:width*0.1};
-				var scaleWidth=width-compareAnalChart.left-compareAnalChart.right;
-				var scaleHeight=height-compareAnalChart.top-compareAnalChart.bottom;
-					
-				var estimateDataBarWidth =  (scaleWidth/(1.5*xAxisData.length));
-				
-				var fontSize =12,fontFamily = "calibri";	
-				var xAxisTimeIndex = [];
-			    for(var counter = 0;counter<xAxisData.length ;counter++)
-				{
-					xAxisTimeIndex[counter] = counter;
-				}
 
-		//		gridManager.init(svgElement, scaleHeight, scaleWidth, compareAnalChart.left-(estimateDataBarWidth/2), compareAnalChart.top,textStyleConfg.gridLineColor);
-				
-				var leftMarginOfSvg = $(selectorElement).offset().left;
-				console.log("comparison "+leftMarginOfSvg)
-				var compareChartMainGroup = svgElement.append("g")
-								   .attr('class','main-group')
-								   .attr("transform", "translate(" + compareAnalChart.left + "," + compareAnalChart.top + ")")
-								   
-				
-	
-			//title here
-			var pixcelPerChar = 7;
-			var leftIndicator = (width/2) - ((title.length*pixcelPerChar)/2)
-			var titleGroup = svgElement.append("g")
-									   .attr('class','title')
-			axisLabelController.appendLabel(title,leftIndicator,compareAnalChart.top/2,0,titleGroup,textStyleConfg.chartTitleColor,800);
-
-			//	titleRef.text(textWrapper.wrapText(title,30));						   
-				
-				var xScale = d3.scale.linear()
-                                     .domain([0,xAxisData.length-1])
-                                     .range([estimateDataBarWidth*.5,scaleWidth-estimateDataBarWidth*.5]); 
-							
-				var selectedArray;				
-				selectedArray = d3.min(yAxisEstimateData)<d3.min(yAxisActualData)? yAxisEstimateData: yAxisActualData;
-				var yMin = minMaxController.getMin(selectedArray);
-				
-				selectedArray = d3.max(yAxisEstimateData)>d3.max(yAxisActualData)? yAxisEstimateData: yAxisActualData;
-				var yMax = minMaxController.getMax(selectedArray);
-				
-				var yScale = d3.scale.linear()
-								.domain([yMin,yMax])
-								.range([scaleHeight,0]);
-						
-		//x axis
-		
-					var largestStringLngth=0;
-					for(var counter =0 ;counter<xAxisData.length;counter++)
-					{
-						if(largestStringLngth<(xAxisData[counter].toString()).length)
-						{
-							largestStringLngth = (xAxisData[counter].toString()).length;
-						}
-					}
-					
-		/*		var xAxis = d3.svg.axis()
-							.scale(xScale)
-							.orient("bottom")
-							.tickValues(tickController.getXTickArray(0,(xAxisData.length),largestStringLngth, (scaleWidth)));
-				
-				var xAxisTextRef = compareChartMainGroup.append("g")
-										.attr('id','xAxis')
-										.attr("class", "x axis")
-										.attr('fill',"none")
-										.attr("transform", "translate("+0+"," + scaleHeight + ")")
-										.call(xAxis);
-						xAxisTextRef.selectAll('text')
-							             .text(function(d){return xAxisData[d];})
-										 .style('font-size',fontSize)
-										 .attr('font-family',fontFamily)
-										 .attr('fill','black');
-										 */
-
-			   var textSize = textStyleConfg["font-size"]/2;
-				var widthForText = (scaleWidth)/(xAxisData.length);
-				widthForText =widthForText*1.5;
-				for(var i=0;i<xAxisData.length;i++)
-				{
-					
-					
-					var textArray = wrapText(xAxisData[i].toString(),widthForText,textSize);
-					
-					if(textArray.length!=1)
-					textArray[0] = textArray[0]+"..";
-				//	svg.append("circle").attr("cx",margin.left+x(i)).attr("cy",height+margin.top).attr("r",2).attr("fill","red");
-					compareChartMainGroup.append("text")
-					.attr("x",function(){
-						return (xScale(i)-(textArray[0].length*6)/2);
-					})
-					.attr("y",function(){
-						if(i%2==0)
-						return scaleHeight+compareAnalChart.bottom*.3;
-						else
-						return scaleHeight+compareAnalChart.bottom*.6;
-						
-					})
-					.text(textArray[0])
-					.attr("fill",textStyleConfg["tick-font-color"]);
-					
-				} 
-				
-	//xAxis label here	
-		
-	var pixcelPerChar=6;
-	var totalXLabelPixcel=xAxisLabel.toString().length*pixcelPerChar;
-	var xIndicationLabelTop=scaleHeight+(compareAnalChart.bottom-5);
-	var xIndicationLabelLeft=scaleWidth/2-totalXLabelPixcel/2;
-	axisLabelController.appendLabel(xAxisLabel,xIndicationLabelLeft,xIndicationLabelTop,0,compareChartMainGroup,textStyleConfg.xLabelColor,600);			   							
-													
-				var yAxis = d3.svg.axis()
-								.scale(yScale)
-								.orient("left")
-								.tickValues(tickController.getTickArray(yMin,yMax,8));
-				
-				compareChartMainGroup.append("g")
-								.attr('id','yAxis')
-								.attr("class", "y axis")
-								.attr('fill',"none")
-								.attr("transform", "translate("+0+"," + 0 + ")")
-								.call(yAxis)
-								.selectAll('text')
-								.style('font-size',fontSize)
-								.style('font-family',fontFamily)
-								.attr('fill','black');
-				
-		
-		//yAxis label here					
-		var totalYLabelPixcel=yAxisLabel.toString().length*pixcelPerChar;			
-		var yIndicationLabelTop=scaleHeight/2+totalYLabelPixcel/2;
-        var yIndicationLabelLeft=(-compareAnalChart.left+15);
-		axisLabelController.appendLabel(yAxisLabel,yIndicationLabelLeft,yIndicationLabelTop,-90,compareChartMainGroup,textStyleConfg.yLabelColor,600);			   													   
-					
-				var estimateRectGroupRef = compareChartMainGroup
-											.selectAll('.rect')
-											.data(yAxisEstimateData)
-						    				.enter()
-											.append('rect')
-											.attr('width',estimateDataBarWidth)
-											.attr('height',0)
-											.attr('x',function(d,i){return xScale(i)-(estimateDataBarWidth/2)})
-											.attr('y',scaleHeight)
-											.attr("value",function(d,i){return i;})
-											.attr('fill','#000000')
-											.attr("opacity",0.2)
-											.on("mousemove",function()
-											{
-												var x = d3.event.pageX;
-												var y = d3.event.pageY;
-												x=x-(leftMarginOfSvg+compareAnalChart.left);
-												x = Math.round(xScale.invert(x));
-												var value = d3.select(this).attr("value")
-												var heading=xAxisData[value];
-												var yAxisEstimateVal = currencyUnit+" "+yAxisEstimateData[value] + " "+yAxisUnit;
-												var yAxisActualVal = currencyUnit+" "+yAxisActualData[value] + " "+yAxisUnit;
-												var yHeadingValueMap=[{"headingName":yAxisEstimateDataUnit[value]+" "+yAxisLabel,"headingVal":yAxisEstimateVal},
-																	  {"headingName":yAxisActualDataUnit[value]+" "+yAxisLabel,"headingVal":yAxisActualVal}
-																	  ];
-												
-												toolTipManager.showToolTip(d3.event,"",(heading), false,yHeadingValueMap,d3.event.pageY*.90);	
-												
-											})
-											.on("mouseleave",function(){
-												toolTipManager.hideTooTip();
-											});
-						estimateRectGroupRef
-								.transition()
-								.duration(1500)
-								.attr('height',function(d,i){return yScale(yMin)-yScale(d)})
-								.attr('y',function(d,i){return yScale(d)});
-								
-			var gradient = compareChartMainGroup.append("svg:defs")
-						.append("svg:linearGradient")
-						.attr("id", "gradientComparisonChart")
-						.attr("x1", "0%")
-						.attr("y1", "0%")
-						.attr("x2", "100%")
-						.attr("y2", "100%")
-						.attr("spreadMethod", "pad");
-
-						gradient.append("svg:stop")
-						.attr("offset", "0%")
-						.attr("stop-color", "#bfefee")
-						.attr("stop-opacity", 1);
-
-						gradient.append("svg:stop")
-						.attr("offset", "50%")
-						.attr("stop-color", "#79d1cf")
-						.attr("stop-opacity", 1);
-						
-						 gradient.append("svg:stop")
-						.attr("offset", "100%")
-						.attr("stop-color", "#bfefee")
-						.attr("stop-opacity", 1);//ef2f1a
-
-				
-				var gradient1 = compareChartMainGroup.append("svg:defs")
-						.append("svg:linearGradient")
-						.attr("id", "gradient1ComparisonChart")
-						.attr("x1", "0%")
-						.attr("y1", "0%")
-						.attr("x2", "100%")
-						.attr("y2", "100%")
-						.attr("spreadMethod", "pad");
-
-						gradient1.append("svg:stop")
-						.attr("offset", "0%")
-						.attr("stop-color", "#ef2f1a")
-						.attr("stop-opacity", 1);
-
-						gradient1.append("svg:stop")
-						.attr("offset", "50%")
-						.attr("stop-color", "#ef2f1a")
-						.attr("stop-opacity", 1);
-						
-						 gradient1.append("svg:stop")
-						.attr("offset", "100%")
-						.attr("stop-color", "#ef2f1a")
-						.attr("stop-opacity", 1);//ef2f1a
-						
-				var actualDataBarWidth =  (scaleWidth/(3*xAxisData.length));
-				
-				var actualRectGroupRef = compareChartMainGroup
-											.selectAll('.rect')
-											.data(yAxisActualData)
-						    				.enter()
-											.append('rect')
-											.attr("value",function(d,i){return i;})
-											.attr('width',actualDataBarWidth)
-											.attr('height',0)
-								            .attr('x',function(d,i){return xScale(i)-(actualDataBarWidth/2)})                               
-								            .attr('y',scaleHeight)
-										//	.attr('fill','#ff7f0e');
-											.attr('fill',function(d,i)
-											{
-												if(d<yAxisEstimateData[i])
-													return "url(#gradient1ComparisonChart)";
-												else
-													return "url(#gradientComparisonChart)";
-											})
-											.on("mouseover",function()
-											{
-										//		d3.select(this).attr('fill',"#3e9ad9");
-											})
-											.on("mousemove",function()
-											{
-												var x = d3.event.pageX;
-												var y = d3.event.pageY;
-												x=x-(leftMarginOfSvg+compareAnalChart.left);
-												x = Math.round(xScale.invert(x));
-												var value = d3.select(this).attr("value")
-												var heading=xAxisData[value];
-												var yAxisEstimateVal = currencyUnit+" "+yAxisEstimateData[value] + " "+yAxisUnit;
-												var yAxisActualVal = currencyUnit+" "+yAxisActualData[value] + " "+yAxisUnit;
-												var yHeadingValueMap=[{"headingName":yAxisEstimateDataUnit[value]+" "+yAxisLabel,"headingVal":yAxisEstimateVal},
-																	  {"headingName":yAxisActualDataUnit[value]+" "+yAxisLabel,"headingVal":yAxisActualVal}
-																	  ];
-												
-												toolTipManager.showToolTip(d3.event,"",(heading), false,yHeadingValueMap,d3.event.pageY*.90);	
-												
-											})
-											.on("mouseleave",function()
-											{
-												toolTipManager.hideTooTip();
-										//		d3.select(this).attr('fill',"url(#gradient)");
-											});
-											
-						actualRectGroupRef
-								.transition()
-								.duration(1500)
-								.attr('height',function(d,i){return yScale(yMin)-yScale(d)})
-								.attr('y',function(d,i){return yScale(d)});
-					
-					//hide axis path
-					hideAxisPath(svgElement);
-					
-					//set font here
-					setTextStyleAndSvgBackGround(svgElement);	
-		}
-	}
-	
-	
 	
 	
 	  return {
@@ -33419,9 +33121,7 @@ feMerge.append("feMergeNode")
 			areaChartWithNegativeValueAnalysis:areaChartWithNegativeValueGraph.areaChartWithNegativeValueAnalysis,
 			areaChartWithVaryColorAnalysis:areaChartWithVaryColorGraph.areaChartWithVaryColorAnalysis,
 			musicSpikesAnalysis:musicSpikesGraph.musicSpikesAnalysis,
-			comparisonAnalysis:comparisonGraph.comparisonAnalysis,
-			comparisonNewAnalysis:comparisonNewGraph.comparisonNewAnalysis,
-			
+			comparisonAnalysis:comparisonGraph.comparisonAnalysis,			
 			drawThreeDGroupedBarChart: threeDGroupedBarChart.drawThreeDGroupedBarChart,
 			globChartAnalysis:globAnalysisGraph.globChartAnalysis,
 			detailAnalysis:detailAnalysisGraph.detailAnalysis,
